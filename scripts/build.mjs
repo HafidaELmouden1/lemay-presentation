@@ -23,6 +23,13 @@ await rm(OUT, { recursive: true, force: true })
 await mkdir(OUT, { recursive: true })
 for (const asset of ASSETS) await cp(asset, join(OUT, asset), { recursive: true })
 
+// Les PDF exportés sont publiés avec le site: le recruteur peut les télécharger.
+try {
+  await cp('exports', join(OUT, 'pdf'), { recursive: true })
+} catch {
+  // pas d'exports: le build reste valide
+}
+
 const hash = createHash('sha256')
 for (const file of await walk(OUT)) hash.update(await readFile(file))
 const stamp = hash.digest('hex').slice(0, 12)

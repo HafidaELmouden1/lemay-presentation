@@ -13,6 +13,19 @@ Trois modes, une seule source de contenu :
 | Répétition | `/#/rehearse/1` | vous : chronomètre total + par slide, repères et alertes |
 | Export PDF | `/#/print` | impression papier / PDF de secours |
 
+## En ligne
+
+| | Lien |
+| --- | --- |
+| Présentation (à envoyer au recruteur) | <https://hafidaelmouden1.github.io/lemay-presentation/> |
+| Votre discours (privé, ne pas partager) | <https://hafidaelmouden1.github.io/lemay-presentation/#/speaker> |
+| Répétition chronométrée | <https://hafidaelmouden1.github.io/lemay-presentation/#/rehearse> |
+| PDF — présentation (15 pages) | [`pdf/Hafida-El-Mouden-Presentation-Lemay.pdf`](pdf/Hafida-El-Mouden-Presentation-Lemay.pdf) |
+| PDF — discours (8 pages A4) | [`pdf/Hafida-El-Mouden-Discours-Lemay.pdf`](pdf/Hafida-El-Mouden-Discours-Lemay.pdf) |
+
+Hébergé par GitHub Pages (branche `gh-pages`, dossier `dist/`). Pour republier après une
+modification : `npm run build`, puis pousser `dist/` sur `gh-pages`.
+
 ## Démarrer
 
 ```bash
@@ -50,7 +63,8 @@ Voir `DEPLOYMENT.md` pour les détails, y compris un sous-chemin (`/presentation
 | `F` | plein écran |
 | `S` | mode orateur (même fenêtre) |
 | `R` | mode répétition (chronomètre remis à zéro) |
-| `P` | vue impression → PDF |
+| `P` | vue impression (15 pages, 16:9) → PDF |
+| `N` | document « notes d'orateur » (A4) → PDF |
 | `?` | rappel des raccourcis |
 | `Échap` | quitter un mode |
 
@@ -64,6 +78,25 @@ sur tablette.
    deux (BroadcastChannel), l'URL suit la slide courante.
 
 Le mode orateur ne montre que des notes : rien de la présentation n'y est dupliqué à l'écran partagé.
+
+## Exporter les PDF
+
+Les deux PDF livrés sont produits par le deck lui-même, pas par un outil externe :
+
+```bash
+# 1. Chrome doit tourner avec le port de débogage
+"C:/Program Files/Google/Chrome/Application/chrome.exe" --headless=new \
+  --remote-debugging-port=9222 --user-data-dir=/tmp/chrome-pdf about:blank
+
+# 2. rendu des deux documents
+node scripts/pdf/export.mjs exports        # utilise http://127.0.0.1:5174
+
+# 3. suppression des pages blanches de pagination + contrôle du nombre de pages
+uv run --with pymupdf python scripts/pdf/trim.py exports
+```
+
+`trim.py` vérifie au passage que chaque page contient du texte et que le deck fait bien
+**15 pages** en 960×540 pt (16:9).
 
 ## Éditer le contenu
 
