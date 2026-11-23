@@ -271,7 +271,7 @@ function renderSpeaker() {
 
       <div class="speaker-grid">
         <div class="col" style="gap:1.1rem">
-          ${renderStage(state.index, { preview: true })}
+          <div class="speaker-preview">${renderStage(state.index, { preview: true })}</div>
           <div class="note-card">
             <p class="note-label">Timing</p>
             <div class="timing-row">
@@ -291,6 +291,15 @@ function renderSpeaker() {
           <div class="note-card">
             <p class="note-label">Phrase clé</p>
             <p class="key-line">« ${note.key} »</p>
+          </div>
+
+          <div class="note-card">
+            <p class="note-label">Élément par élément — ce que vous dites</p>
+            <ul class="detail-list">
+              ${(note.details || [])
+                .map(([label, say]) => `<li><strong>${label}</strong><span>${say}</span></li>`)
+                .join('')}
+            </ul>
           </div>
 
           <div class="note-card">
@@ -318,6 +327,11 @@ function renderSpeaker() {
     </div>`
   bindControls()
   applyDelays()
+  // deux frames : la première mesure le panneau, la seconde applique l'échelle
+  requestAnimationFrame(() => {
+    scalePreview()
+    requestAnimationFrame(scalePreview)
+  })
 }
 
 
@@ -367,6 +381,15 @@ function renderNotes() {
             <p class="nd-label">Transition</p>
             <p class="nd-next">${note.next}</p>
           </div>
+        </div>
+
+        <div class="nd-details">
+          <p class="nd-label">Élément par élément</p>
+          <ul>
+            ${(note.details || [])
+              .map(([label, say]) => `<li><strong>${label} — </strong>${say}</li>`)
+              .join('')}
+          </ul>
         </div>
 
         <div class="nd-cols">

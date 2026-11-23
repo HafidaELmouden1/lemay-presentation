@@ -48,6 +48,12 @@ export const NOTES = {
     show: ['Laisser le titre respirer deux secondes', 'Annoncer les cinq sujets d’un trait'],
     avoid: ['Ne pas détailler le parcours professionnel', 'Ne pas s’excuser sur GoHighLevel dès l’introduction'],
     next: '« Je commence par la première architecture : LeadGuard AI. »',
+    details: [
+      ['Le titre', '« CRM, automatisation, intégration IA : les trois sujets que vous m’avez demandés. »'],
+      ['La ligne technique', '« Mon terrain quotidien : Python, APIs, n8n, Odoo 19, GoHighLevel. »'],
+      ['L’agenda à droite', '« Cinq parties, dans votre ordre, et je tiens les neuf minutes. »'],
+      ['Le bandeau du bas', '« Tout ce que je montre est un PoC personnel, en sandbox, avec des données synthétiques. »'],
+    ]
   },
   2: {
     guide: 'Poser le problème métier avant la technique.',
@@ -57,6 +63,13 @@ export const NOTES = {
     show: ['Le bandeau « Developer Sandbox · données synthétiques »', 'La chaîne Demande → Qualification → Analyse → Action'],
     avoid: ['Ne jamais dire « j’ai déployé ça chez un client »', 'Ne pas parler de DeepSeek ici, ça vient après'],
     next: '« Voici comment c’est construit. »',
+    details: [
+      ['La chaîne en quatre temps', '« Une demande entre par un formulaire, elle est qualifiée, analysée, puis transformée en action CRM — c’est le parcours que je vais dérouler. »'],
+      ['Objectif 1 — qualifier', '« Qualifier sans relire chaque formulaire : service, type de projet, ville, ampleur. »'],
+      ['Objectif 2 — détecter le manque', '« Repérer ce qui manque, parce qu’une demande incomplète n’est pas une demande à jeter : c’est une demande à compléter. »'],
+      ['Objectif 3 — recommander', '« Et proposer la prochaine action : visite technique, préparation de devis, ou revue humaine. »'],
+      ['Le bandeau REAL / sandbox', '« Le cadre est réel — Developer Sandbox, pipeline, workflow — mais la marque et les contacts sont fictifs. »'],
+    ]
   },
   3: {
     guide: 'Slide la plus importante : nommer chaque brique, son rôle, sa limite.',
@@ -69,6 +82,15 @@ export const NOTES = {
     ],
     avoid: ['Ne pas expliquer le code des règles', 'Ne pas citer les fichiers ni les ports', 'Ne pas décrire plus de trois fois le rôle du LLM'],
     next: '« Voyons ce que ça donne sur un lead de la démo. »',
+    details: [
+      ['Colonne 1 — GoHighLevel', '« GoHighLevel collecte : il reçoit le formulaire, crée le contact, ouvre l’opportunité et garde l’historique. C’est la source de vérité — mais il ne qualifie rien, il ne note rien. »'],
+      ['Colonne 2 — n8n, étapes 1 à 3', '« n8n reçoit le webhook, normalise les champs du formulaire, puis vérifie la structure : au moins un contact joignable et un consentement. »'],
+      ['Colonne 2 — n8n, étapes 4 et 5', '« Il appelle ensuite mon service et attend la route, puis il réécrit le résultat dans le CRM. Il orchestre et il trace — il ne décide jamais. »'],
+      ['Colonne 3 — FastAPI', '« LeadGuard, mon service Python : il vérifie que l’appel est recevable, il garantit l’idempotence — un rejeu ne crée pas de doublon —, il appelle le modèle, valide le JSON, applique les règles et journalise l’audit. »'],
+      ['Colonne 3 — DeepSeek', '« DeepSeek ne fait qu’une chose : transformer un texte libre en champs exploitables. Il ne choisit pas la suite. »'],
+      ['Colonne 3 — le bloc rouge', '« Les règles déterministes sont la seule brique qui choisit : confiance au-dessus de 0,80, ville couverte, service reconnu, consentement. Et jamais un prix. »'],
+      ['Colonne 4 — le retour', '« Enfin le retour : champs IA, tags, étape du pipeline, note d’analyse et tâche commerciale. Aucun message ne part au client. »'],
+    ]
   },
   4: {
     guide: 'Montrer le parcours, pas la théorie.',
@@ -78,6 +100,14 @@ export const NOTES = {
     show: ['Lire le résultat encadré à droite, chiffres compris', 'Nommer les trois tags'],
     avoid: ['Ne pas dérouler les neuf étapes une par une', 'Ne pas traiter 0,96 comme une probabilité scientifique'],
     next: '« Tout n’est pas automatisable : voici où je m’arrête. »',
+    details: [
+      ['La grille des neuf étapes', '« Neuf étapes : le formulaire crée contact et opportunité en AI Qualification, le webhook part vers n8n, n8n normalise et valide, LeadGuard analyse, les règles décident, puis le CRM est synchronisé. »'],
+      ['Service / ville', '« Sur ce cas : rénovation commerciale, 400 m², à Montréal. »'],
+      ['Confiance et action', '« Le score atteint 0,96, l’action recommandée est une visite technique. »'],
+      ['Le bloc CRM à droite', '« Côté CRM : l’opportunité passe en Site Visit To Schedule, trois tags sont posés, et une tâche est créée pour l’équipe commerciale. »'],
+      ['Les règles appliquées', '« Et sous le résultat, les règles qui ont laissé passer ce lead — pour que la décision soit lisible, pas magique. »'],
+      ['La ligne d’idempotence', '« Rejouer le même formulaire ne crée ni second contact, ni second devis : c’est la même clé d’événement. »'],
+    ]
   },
   5: {
     guide: 'Le garde-fou. Court et net.',
@@ -87,6 +117,13 @@ export const NOTES = {
     show: ['Les deux cartes côte à côte', 'La ligne « raison » côté revue humaine'],
     avoid: ['Ne pas ouvrir le débat sur les hallucinations', 'Ne pas promettre zéro erreur'],
     next: '« Deuxième architecture : QuoteFlow AI autour d’Odoo 19. »',
+    details: [
+      ['Carte de gauche — route automatique', '« À gauche, une demande complète : service reconnu, ville couverte, consentement, aucun signal de sécurité — l’automatisation va au bout. »'],
+      ['Le score 0,96', '« À 0,96, la confiance est au-dessus du seuil, donc pas de revue. »'],
+      ['Carte de droite — revue humaine', '« À droite, une demande floue : « je voudrais faire des travaux » — le service, le budget et l’adresse manquent ; le score tombe et la route est la revue humaine. »'],
+      ['Les deux conséquences', '« Même pipeline, deux issues : Site Visit To Schedule d’un côté, Missing Information avec une tâche interne de l’autre. »'],
+      ['La bande rouge', '« La phrase à retenir : l’IA accélère la décision, elle ne supprime pas le contrôle. »'],
+    ]
   },
   6: {
     guide: 'Transition vers Odoo : le parcours avant l’outil.',
@@ -96,6 +133,11 @@ export const NOTES = {
     show: ['La chaîne de sept étapes en une ligne'],
     avoid: ['Ne pas détailler Odoo ici, la slide suivante le fait'],
     next: '« Voici les couches du système. »',
+    details: [
+      ['Le titre', '« Deuxième architecture : QuoteFlow AI, autour d’Odoo 19. »'],
+      ['La chaîne de sept étapes', '« Mais ce n’est pas un générateur de devis : c’est le parcours complet, du lead aux opérations — visite, devis, signature, paiement, contrat. »'],
+      ['La phrase de pied', '« Odoo reste la source de vérité métier : produits, prix, taxes, contrat. »'],
+    ]
   },
   7: {
     guide: 'Cinq couches : nommer le rôle et la limite de chacune, de haut en bas.',
@@ -108,6 +150,14 @@ export const NOTES = {
     ],
     avoid: ['Ne pas prétendre que tout est en production', 'Ne pas entrer dans la configuration Stripe', 'Ne pas lister les modules Odoo sans lien avec le parcours'],
     next: '« Le parcours, étape par étape. »',
+    details: [
+      ['Couche 1 — canaux', '« En haut, les canaux : e-mail, formulaire, téléphone, CRM. Ils collectent la demande, ils ne la qualifient pas. »'],
+      ['Couche 2 — n8n', '« n8n orchestre : il reçoit, il route vers le bon traitement, il réessaie en cas d’échec et il journalise. Il ne décide pas des prix. »'],
+      ['Couche 3 — QuoteFlow AI', '« QuoteFlow AI structure : DeepSeek pour l’extraction, un fallback GLM si le fournisseur ne répond pas, puis des règles déterministes. Son rôle est de produire des données propres — jamais un prix. »'],
+      ['Couche 4 — Odoo, le bloc rouge', '« Puis Odoo 19, la source de vérité : le client, la visite technique, le devis avec catalogue et taxes, le contrat, le mail center. Odoo ne qualifie pas la demande, mais rien d’autre ne calcule un prix. »'],
+      ['Couche 5 — services externes', '« Enfin l’externe : SMTP et IMAP pour les courriels, la signature électronique, Stripe par marque. Ils exécutent — ils ne stockent pas le dossier. »'],
+      ['La colonne de droite', '« Chaque couche a donc une limite écrite : c’est ce qui évite les zones grises en production. »'],
+    ]
   },
   8: {
     guide: 'Timeline en cinq phases.',
@@ -117,6 +167,13 @@ export const NOTES = {
     show: ['Les cinq groupes', 'Les deux points de validation humaine (03 et 07)'],
     avoid: ['Ne pas lire les onze libellés', 'Ne pas décrire chaque écran'],
     next: '« Le moment le plus intéressant : la visite technique. »',
+    details: [
+      ['Les cinq phases', '« Onze étapes regroupées en cinq phases : acquisition, technique, commercial, contrat, opérations. »'],
+      ['Les étapes 01 à 05', '« Acquisition puis technique : la demande, la qualification, la visite, le rapport du technicien, l’extraction IA. »'],
+      ['Les étapes 06 et 07', '« Puis le devis brouillon et sa validation humaine — le moment où un humain engage le prix. »'],
+      ['Les étapes 08 à 11', '« Enfin la signature, le paiement, le contrat actif et les opérations. »'],
+      ['Le pied', '« Deux validations humaines seulement : la visite et le devis. Le reste est orchestré. »'],
+    ]
   },
   9: {
     guide: 'L’expertise terrain devient de la donnée.',
@@ -126,6 +183,12 @@ export const NOTES = {
     show: ['Le flux vertical à gauche', 'Les cinq valeurs extraites à droite'],
     avoid: ['Ne pas promettre une extraction parfaite', 'Ne pas parler de modèle ni de prompt'],
     next: '« Et ensuite : devis, signature, paiement. »',
+    details: [
+      ['Le flux de gauche', '« Le technicien est sur site : il dicte, prend des notes et des photos ; la transcription passe dans QuoteFlow AI. »'],
+      ['Le bloc rouge', '« La sortie, ce sont des données structurées, direction Odoo. »'],
+      ['Les cinq valeurs', '« Surface, zones, visites initiales, fréquence, accès — ce sont des valeurs que le devis peut utiliser directement. »'],
+      ['L’encadré du bas', '« Mais l’IA ne fixe jamais un prix : les produits, les taxes et les règles commerciales restent dans Odoo. »'],
+    ]
   },
   10: {
     guide: 'Trois blocs reliés, puis le principe multi-marque.',
@@ -135,6 +198,13 @@ export const NOTES = {
     show: ['Les trois cartes et la flèche vers « contrat actif »', 'L’exemple marque → e-mail → documents → Stripe'],
     avoid: ['Ne pas entrer dans la configuration Stripe', 'Ne pas détailler le contrat juridique'],
     next: '« Un dernier point d’intégration : le mail center. »',
+    details: [
+      ['Carte 1 — devis', '« Le devis est construit dans Odoo : catalogue, liste de prix, taxes, puis validation humaine. »'],
+      ['Carte 2 — signature', '« La signature passe par un lien sécurisé, et le contrat signé est archivé. »'],
+      ['Carte 3 — paiement', '« Le paiement passe par Stripe, avec un webhook qui confirme l’encaissement. »'],
+      ['La bande contrat actif', '« Résultat : un contrat actif, puis la planification des interventions et le suivi. »'],
+      ['La ligne multi-marque', '« Et chaque marque garde son identité : le bon e-mail, les bons documents, la bonne configuration Stripe. »'],
+    ]
   },
   11: {
     guide: 'Vingt secondes maximum. C’est un bonus, pas un sujet.',
@@ -144,6 +214,12 @@ export const NOTES = {
     show: ['Les trois fournisseurs qui convergent vers Odoo'],
     avoid: ['Ne pas raconter l’historique du projet', 'Ne pas dépasser trente secondes'],
     next: '« Passons à la résolution de problème. »',
+    details: [
+      ['Les trois fournisseurs', '« OVH, Titan, Hostinger : trois fournisseurs, trois configurations différentes. »'],
+      ['Le protocole commun', '« Tous passent par SMTP et IMAP, et remontent dans le mail center d’Odoo. »'],
+      ['La carte Odoo', '« On y retrouve les entrants, les envoyés, les fils, les pièces jointes, les erreurs de synchro — et le rattachement au client, au lead, au devis, au contrat. »'],
+      ['La phrase de pied', '« Un historique commercial unique, même avec plusieurs fournisseurs et plusieurs marques. »'],
+    ]
   },
   12: {
     guide: 'Symptôme → investigation → cause racine → correctif. 50 secondes.',
@@ -153,6 +229,13 @@ export const NOTES = {
     show: ['Les quatre blocs dans l’ordre', 'La ligne « état attendu ≠ état réel → réconciliation »'],
     avoid: ['Ne pas expliquer iptables ligne par ligne', 'Ne pas minimiser l’incident'],
     next: '« Et la manière dont je prends une fonctionnalité de bout en bout. »',
+    details: [
+      ['Symptôme', '« Le symptôme : l’application affichait un proxy actif, alors qu’il était injoignable après un rescan du modem. »'],
+      ['Investigation', '« J’ai comparé trois états : la base, le namespace Linux, et le forwarding réseau. »'],
+      ['Cause racine', '« La cause : après un changement de namespace, certaines règles pointaient encore l’ancienne IP. »'],
+      ['Correctif', '« Le correctif : réconciliation d’état, health checks, réparation idempotente et verrou de concurrence. »'],
+      ['La ligne réconciliation', '« C’est ça, ma méthode : état attendu contre état réel, puis réconcilier — pas patcher le symptôme. »'],
+    ]
   },
   13: {
     guide: 'Ownership : du besoin utilisateur à la production.',
@@ -162,6 +245,12 @@ export const NOTES = {
     show: ['La chaîne besoin → modèle → API → app → sync → PDF', 'La liste des cas limites traités'],
     avoid: ['Ne pas détailler Flutter', 'Ne pas oublier les cas limites : c’est le cœur du message'],
     next: '« Dernière question : GoHighLevel. »',
+    details: [
+      ['La chaîne complète', '« Besoin utilisateur, modèle de données, API Django, application Flutter, stockage offline, synchronisation, rapports PDF, production : j’ai tenu toute la chaîne. »'],
+      ['L’exemple de fonctionnalité', '« Exemple : une observation posée directement sur un plan, avec photos, possible même sans réseau. »'],
+      ['Les cas limites', '« Les doublons, les uploads partiels, les conflits de synchronisation, les photos prises hors ligne : c’est là que se joue la fiabilité. »'],
+      ['La phrase de pied', '« Pour moi une fonctionnalité est finie quand le parcours complet tient — pas quand le code compile. »'],
+    ]
   },
   14: {
     guide: 'Transparence d’abord, puis la preuve, puis la méthode.',
@@ -175,6 +264,12 @@ export const NOTES = {
       'Ne pas promettre une maîtrise totale en deux semaines',
     ],
     next: '« Pour résumer. »',
+    details: [
+      ['Colonne gauche — déjà construit', '« Ce qui est déjà en place : pipeline, custom fields, tags, formulaire, workflow, webhook, n8n, FastAPI, synchronisation IA — je l’ai construit ces dernières semaines. »'],
+      ['Colonne droite — méthode', '« Ma méthode : comprendre, configurer, tester, casser volontairement, valider les cas limites, documenter, répéter. »'],
+      ['La bande méthode client', '« Chez un client je commence par cartographier l’existant, puis je modifie par petits pas, je valide, je livre. »'],
+      ['Le pied — transparence', '« Je n’ai pas deux ans sur la plateforme, je le dis : mais le socle CRM, API, webhooks, n8n, Python, je l’ai déjà. »'],
+    ]
   },
   15: {
     guide: 'Quatre cartes, une phrase, merci. 25 secondes.',
@@ -184,5 +279,10 @@ export const NOTES = {
     show: ['Laisser la phrase de clôture affichée pendant le remerciement'],
     avoid: ['Ne pas ajouter de sujet nouveau', 'Ne pas parler plus de trente secondes'],
     next: 'Fin — laisser la slide ouverte pour les questions.',
+    details: [
+      ['Les quatre cartes', '« Quatre points : compréhension du métier, intégration, IA sous contrôle, qualité d’ingénierie. »'],
+      ['La phrase de clôture', '« La technologie doit simplifier les opérations, pas ajouter de la complexité. »'],
+      ['La dernière ligne', '« Prête à transformer des processus CRM en systèmes opérationnels fiables. »'],
+    ]
   },
 }

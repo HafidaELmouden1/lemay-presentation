@@ -527,6 +527,27 @@ body.mode-print {
   margin: 0;
 }
 
+.nd-details {
+  margin-top: 4mm;
+  border-left: 2px solid #ff0a17;
+  padding-left: 4mm;
+}
+
+.nd-details ul {
+  margin: 0;
+  padding-left: 4mm;
+  font-size: 9.5pt;
+  line-height: 1.5;
+}
+
+.nd-details li {
+  margin-bottom: 1.2mm;
+}
+
+.nd-details strong {
+  color: #14161a;
+}
+
 .nd-cols {
   display: grid;
   grid-template-columns: 1fr 1fr;
