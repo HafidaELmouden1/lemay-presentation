@@ -781,3 +781,153 @@ kbd {
   font-size: 0.8rem;
   letter-spacing: 0.02em;
 }
+
+/* ================================================================= flow ==== */
+/* Un vrai schéma : des nœuds de même hauteur, des connecteurs dessinés, et une
+   barre de zones au-dessus qui dit à quel étage du système on est. */
+.lanes {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5cqw;
+  margin-bottom: 0.45cqw;
+}
+
+.lane-gap {
+  flex: none;
+  width: 3cqw;
+}
+
+.lane {
+  border-top: 1px solid var(--line-strong);
+  padding-top: 0.45cqw;
+  text-align: center;
+  font-size: clamp(0.52rem, 0.66cqw, 0.74rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.lane-live {
+  border-top-color: var(--accent);
+  color: #ff6b73;
+}
+
+.flow {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.flow-node {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35cqw;
+  min-height: 8.2cqw;
+  padding: 0.9cqw 0.95cqw;
+  border-radius: 0.8cqw;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  min-width: 0;
+  flex: 1;
+}
+
+.flow-node-accent {
+  background: var(--accent);
+  border-color: var(--accent-deep);
+  color: #fff;
+}
+
+.flow-node-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5cqw;
+}
+
+.flow-node-name {
+  font-size: clamp(0.72rem, 0.98cqw, 1.02rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.flow-node-role {
+  font-size: clamp(0.6rem, 0.8cqw, 0.88rem);
+  line-height: 1.32;
+  color: var(--ink-soft);
+}
+
+.flow-node-accent .flow-node-role {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.flow-node-tag {
+  margin-top: auto;
+  font-size: clamp(0.48rem, 0.58cqw, 0.62rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.flow-node-accent .flow-node-tag {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.flow-link {
+  flex: none;
+  width: 3cqw;
+  display: grid;
+  place-items: center;
+  color: var(--line-strong);
+}
+
+.flow-link svg {
+  width: 100%;
+  height: 1.1cqw;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.2;
+}
+
+/* ---------------------------------------------------------- bandes (Q2) --- */
+.band-row {
+  display: grid;
+  grid-template-columns: 11cqw 1fr 10.5cqw;
+  align-items: center;
+  gap: 0.8cqw;
+}
+
+.band-label {
+  text-align: right;
+}
+
+.band-role {
+  font-size: clamp(0.55rem, 0.72cqw, 0.8rem);
+  color: var(--ink-soft);
+  margin-top: 0.15cqw;
+}
+
+.band-limit {
+  font-size: clamp(0.52rem, 0.68cqw, 0.76rem);
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--muted);
+  border-left: 1px solid var(--line);
+  padding-left: 0.6cqw;
+}
+
+.band-connector {
+  display: grid;
+  place-items: center;
+  color: var(--line-strong);
+  height: 1.1cqw;
+}
+
+.band-connector svg {
+  width: 1.1cqw;
+  height: 1.1cqw;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.4;
+}
