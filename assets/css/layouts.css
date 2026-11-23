@@ -130,18 +130,20 @@
 /* --------------------------------------------------------- architecture --- */
 .arch {
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
   gap: 0.5cqw;
   min-height: 0;
-  flex: 1;
+  /* pas de flex:1 : le bloc se centre entre le titre et la bande au lieu de
+     remplir la zone et laisser un vide interne */
+  flex: 0 1 auto;
 }
 
 .zone {
   display: flex;
   flex-direction: column;
-  gap: 0.55cqw;
+  gap: 0.5cqw;
   min-width: 0;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .zone-head {
@@ -252,6 +254,8 @@
 
 .arrow-h {
   width: 2cqw;
+  align-items: flex-start;
+  padding-top: 2.6cqw;
 }
 
 .arrow-h svg,
@@ -447,7 +451,7 @@
 /* --------------------------------------------------------- speaker mode --- */
 .speaker-shell {
   min-height: 100vh;
-  background: var(--paper-2);
+  background: var(--paper);
   padding: 2.2rem;
   font-family: var(--font);
   color: var(--ink);
@@ -467,7 +471,7 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 700;
-  color: var(--muted);
+  color: #ff0a17;
 }
 
 .speaker-clock {
@@ -483,16 +487,24 @@
 }
 
 .speaker-preview {
+  position: relative;
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid var(--line-strong);
   background: var(--paper);
-  box-shadow: 0 24px 60px -30px rgba(20, 21, 15, 0.35);
+  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.6);
+  aspect-ratio: 16 / 9;
 }
 
+/* Le vrai stage 1920x1080, réduit par transform : la mise en page reste
+   identique à celle de l'écran partagé, jamais refluée dans un petit cadre. */
 .speaker-preview .stage {
-  width: 100%;
-  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: top left;
 }
 
 .notes {
@@ -502,7 +514,7 @@
 }
 
 .note-card {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 1.1rem 1.2rem;
@@ -513,7 +525,7 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 700;
-  color: var(--muted);
+  color: #ff6b73;
   margin: 0 0 0.5rem;
 }
 
@@ -522,13 +534,16 @@
   line-height: 1.6;
   margin: 0;
   color: var(--ink);
+  opacity: 1;
 }
 
 .key-line {
   font-family: var(--display);
-  font-size: 1.35rem;
-  line-height: 1.25;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.3;
   margin: 0;
+  color: var(--ink);
 }
 
 .note-list {
@@ -537,6 +552,14 @@
   font-size: 0.86rem;
   line-height: 1.55;
   color: var(--ink-soft);
+}
+
+.note-card .stat-value {
+  font-size: 1.05rem;
+}
+
+.note-card .stat-label {
+  color: var(--muted);
 }
 
 .note-list li + li {
@@ -548,7 +571,7 @@
   align-items: center;
   gap: 0.6rem;
   font-size: 0.92rem;
-  color: var(--ink);
+  color: var(--ink-soft);
 }
 
 .timing-row {
@@ -673,15 +696,55 @@ kbd {
 
 /* ------------------------------------------------- speaker preview scaling -- */
 /* The preview reuses the real stage markup: same slide, scaled to the panel. */
-.stage-preview {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  border-radius: 0;
-}
+
 
 @media (max-width: 1100px) {
   .speaker-grid {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/* ------------------------------------------------------------ role lists --- */
+/* Chaque brique de l'architecture liste ce qu'elle fait, et ce qu'elle ne fait
+   jamais. C'est ce qui rend le flux global compréhensible en dix secondes. */
+.roles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22cqw;
+}
+
+.role {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45cqw;
+  font-size: clamp(0.62rem, 0.82cqw, 0.9rem);
+  line-height: 1.32;
+  color: var(--ink-soft);
+}
+
+.role-mark {
+  flex: none;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.role-num {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 0.86em;
+  color: var(--muted);
+}
+
+.role-boundary {
+  margin-top: 0.35cqw;
+  padding-top: 0.35cqw;
+  border-top: 1px dashed var(--line-strong);
+  font-size: clamp(0.58rem, 0.76cqw, 0.84rem);
+  line-height: 1.3;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.zone-boundary {
+  margin-top: 0.3cqw;
 }

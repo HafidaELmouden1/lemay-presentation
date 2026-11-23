@@ -6,14 +6,14 @@
 export const SLIDES = [
   { id: 1, title: 'Introduction', section: 'Intro', hud: 'Intro', seconds: 20 },
   { id: 2, title: 'LeadGuard AI — le problème métier', section: 'Q1 · LeadGuard AI', hud: 'Q1 · Problème', seconds: 30 },
-  { id: 3, title: 'LeadGuard AI — architecture du système', section: 'Q1 · LeadGuard AI', hud: 'Q1 · Architecture', seconds: 50 },
-  { id: 4, title: 'Un lead dans le workflow complet', section: 'Q1 · LeadGuard AI', hud: 'Q1 · Parcours', seconds: 40 },
+  { id: 3, title: 'LeadGuard AI — architecture du système', section: 'Q1 · LeadGuard AI', hud: 'Q1 · Architecture', seconds: 65 },
+  { id: 4, title: 'Un lead dans le workflow complet', section: 'Q1 · LeadGuard AI', hud: 'Q1 · Parcours', seconds: 35 },
   { id: 5, title: 'Contrôle humain', section: 'Q1 · LeadGuard AI', hud: 'Q1 · Contrôle humain', seconds: 30 },
   { id: 6, title: 'QuoteFlow AI + Odoo 19', section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Cycle', seconds: 25 },
-  { id: 7, title: 'QuoteFlow AI — architecture en couches', section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Architecture', seconds: 45 },
-  { id: 8, title: 'De la demande au contrat actif', section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Parcours', seconds: 40 },
-  { id: 9, title: 'Visite technique et IA', section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Visite + IA', seconds: 35 },
-  { id: 10, title: 'Devis, signature, paiement', section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Devis → contrat', seconds: 35 },
+  { id: 7, title: 'QuoteFlow AI — architecture en couches', section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Architecture', seconds: 58 },
+  { id: 8, title: 'De la demande au contrat actif', section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Parcours', seconds: 35 },
+  { id: 9, title: 'Visite technique et IA', section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Visite + IA', seconds: 32 },
+  { id: 10, title: 'Devis, signature, paiement', section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Devis → contrat', seconds: 32 },
   { id: 11, title: 'Mail center multi-marque', section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Mail center', seconds: 20 },
   { id: 12, title: 'Corriger la cause, pas le symptôme', section: 'Q3 · Problème', hud: 'Q3 · Cause racine', seconds: 50 },
   { id: 13, title: 'Du besoin utilisateur à la production', section: 'Q4 · Ownership', hud: 'Q4 · Bout en bout', seconds: 50 },
@@ -59,12 +59,15 @@ export const NOTES = {
     next: '« Voici comment c’est construit. »',
   },
   3: {
-    guide: 'Slide la plus importante : lire le schéma de gauche à droite.',
+    guide: 'Slide la plus importante : nommer chaque brique, son rôle, sa limite.',
     speech:
-      "L'architecture tient en quatre zones. GoHighLevel reste le CRM et la source de vérité : le formulaire, le contact, l'opportunité. n8n orchestre : il reçoit le webhook, normalise, valide, puis appelle mon service. LeadGuard, en Python et FastAPI, porte l'intelligence : DeepSeek extrait les informations structurées, et un moteur de règles déterministe décide de la route. n8n revient ensuite dans GoHighLevel pour écrire les champs, les tags, l'étape du pipeline, la note et la tâche. La phrase à retenir : l'IA interprète, les règles décident, et GoHighLevel reste le CRM.",
-    key: 'L’IA interprète. Les règles décident. GoHighLevel reste le CRM.',
-    show: ['Suivre la flèche zone par zone', 'Marquer une pause avant la phrase clé'],
-    avoid: ['Ne pas expliquer le code des règles', 'Ne pas citer les fichiers ni les ports'],
+      "Cette slide répond à une seule question : qui fait quoi. À gauche, GoHighLevel : il reçoit le formulaire, il crée le contact, il ouvre l'opportunité et il en garde l'historique. C'est la source de vérité, mais il ne qualifie rien. Ensuite n8n : il reçoit le webhook, il normalise les champs du formulaire, il vérifie la structure — au moins un contact, un consentement — il appelle mon service, puis il réécrit le résultat dans le CRM. n8n orchestre et trace, il ne décide pas. Au centre, LeadGuard, mon service Python : il vérifie que l'appel est recevable, il garantit l'idempotence pour qu'un rejeu ne crée pas de doublon, il appelle le modèle, il valide le JSON reçu, il applique les règles et il journalise chaque étape. DeepSeek ne fait qu'une chose : transformer une demande en champs exploitables. Et les règles — c'est le bloc rouge — sont la seule brique qui choisit la route : la confiance, la ville, le service, le consentement. Enfin le retour dans GoHighLevel : les champs IA, les tags, l'étape du pipeline, la note et la tâche. Aucun message ne part au client.",
+    key: 'GoHighLevel collecte et conserve. n8n orchestre. LeadGuard analyse et contrôle. Les règles décident.',
+    show: [
+      'Suivre les quatre colonnes dans l’ordre, une phrase par brique',
+      'S’arrêter sur le bloc rouge : c’est la seule décision',
+    ],
+    avoid: ['Ne pas expliquer le code des règles', 'Ne pas citer les fichiers ni les ports', 'Ne pas décrire plus de trois fois le rôle du LLM'],
     next: '« Voyons ce que ça donne sur un lead de la démo. »',
   },
   4: {
@@ -95,12 +98,15 @@ export const NOTES = {
     next: '« Voici les couches du système. »',
   },
   7: {
-    guide: 'Architecture en couches : entrées, orchestration, intelligence, Odoo, externe.',
+    guide: 'Cinq couches : nommer le rôle et la limite de chacune, de haut en bas.',
     speech:
-      "Les canaux d'entrée sont l'e-mail, le formulaire, le téléphone et le CRM. n8n orchestre les échanges. QuoteFlow AI, en Python et FastAPI, structure la demande avec DeepSeek, et un fallback GLM si le premier fournisseur ne répond pas, puis applique des règles déterministes. Odoo 19 porte le cœur métier : CRM, client, visite technique, devis, contrat, mail center. Autour, les services externes : SMTP et IMAP, signature électronique, Stripe. Et en sortie, les opérations : activation du contrat, planification des interventions, suivi.",
-    key: 'Chaque couche a une responsabilité unique.',
-    show: ['Descendre les couches de haut en bas', 'Nommer le fallback GLM'],
-    avoid: ['Ne pas prétendre que tout est en production', 'Ne pas lister des modules sans lien avec le parcours'],
+      "Même logique pour QuoteFlow, en cinq couches. En haut, les canaux : l'e-mail, le formulaire, le téléphone, le CRM — ils collectent la demande, ils ne la qualifient pas. n8n orchestre : il reçoit, il route vers le bon traitement, il réessaie en cas d'échec et il journalise ; il ne décide pas des prix. QuoteFlow AI, en Python et FastAPI, structure la demande avec DeepSeek — et un fallback GLM si le premier fournisseur ne répond pas — puis applique des règles déterministes. Son rôle est de transformer un texte libre en données propres, jamais de fixer un prix. En dessous, le bloc rouge : Odoo 19. C'est la source de vérité métier — le client, la visite technique, le devis avec le catalogue et les taxes, le contrat, le mail center. Odoo ne qualifie pas la demande, mais rien d'autre que lui ne calcule un prix. Enfin les services externes : SMTP et IMAP pour les courriels, la signature électronique, Stripe par marque — ils exécutent, ils ne stockent pas le dossier.",
+    key: 'n8n orchestre, QuoteFlow structure, Odoo reste la source de vérité.',
+    show: [
+      'Descendre les couches de haut en bas, en nommant le rôle',
+      'Lire à droite les limites : ce que la couche ne fait pas',
+    ],
+    avoid: ['Ne pas prétendre que tout est en production', 'Ne pas entrer dans la configuration Stripe', 'Ne pas lister les modules Odoo sans lien avec le parcours'],
     next: '« Le parcours, étape par étape. »',
   },
   8: {

@@ -167,67 +167,99 @@ export function slide02() {
 
 /* ---------------------------------------------------------------- slide 03 */
 export function slide03() {
+  const roles = (items) =>
+    items
+      .map(
+        (item) =>
+          `<div class="role"><span class="role-mark">→</span><span>${item}</span></div>`,
+      )
+      .join('')
+
   return `
   ${head({
     kicker: 'Q1 · Architecture',
-    title: 'LeadGuard AI — System Architecture',
-    lead: 'Quatre zones, une responsabilité par zone. Le flux va de gauche à droite, puis revient au CRM.',
+    title: 'LeadGuard AI — qui fait quoi',
+    lead: 'Chaque brique a une responsabilité précise, et une limite explicite. Une seule prend la décision.',
   })}
 
-  <div class="arch mt-3">
-    <div class="zone anim" ${a(0.05)} style="width:20%">
+  <div class="arch" style="margin:auto 0">
+    <div class="zone anim" ${a(0.05)} style="width:21%">
       ${zoneHead('01', 'CRM · entrée')}
       <div class="zone-body">
-        ${node({ name: 'globe', title: 'GoHighLevel', caption: 'Formulaire · Contact · Opportunité', badge: 'REAL' })}
-        <p class="node-note"><strong>Source de vérité</strong> — le prospect, l’opportunité et l’historique vivent ici.</p>
+        ${node({ name: 'globe', title: 'GoHighLevel', caption: 'Formulaire soumis par le prospect', badge: 'REAL' })}
+        <div class="roles">
+          ${roles([
+            'reçoit la demande du formulaire',
+            'crée le contact (identité, coordonnées)',
+            'ouvre l’opportunité et la suit',
+          ])}
+        </div>
+        <p class="role-boundary">Source de vérité : ne qualifie jamais, ne note jamais.</p>
       </div>
     </div>
 
     ${arrowH()}
 
-    <div class="zone anim" ${a(0.15)} style="width:23%">
-      ${zoneHead('02', 'Orchestration')}
+    <div class="zone anim" ${a(0.14)} style="width:25%">
+      ${zoneHead('02', 'Orchestration · n8n')}
       <div class="zone-body">
-        ${node({ name: 'network', title: 'n8n — Webhook', caption: 'Réception, normalisation, validation', badge: 'REAL' })}
-        ${node({ name: 'git-branch', title: 'n8n — routage', caption: 'Une branche par décision' })}
-        ${node({ name: 'list-checks', title: 'n8n — CRM sync', caption: 'Écritures contrôlées, idempotentes' })}
+        ${node({ name: 'workflow', title: 'n8n', caption: 'Un workflow par responsabilité', badge: 'REAL' })}
+        <div class="roles">
+          <div class="role"><span class="role-num">1</span><span>reçoit le webhook du formulaire</span></div>
+          <div class="role"><span class="role-num">2</span><span>normalise les champs GHL</span></div>
+          <div class="role"><span class="role-num">3</span><span>valide la structure (contact, consentement)</span></div>
+          <div class="role"><span class="role-num">4</span><span>appelle LeadGuard et attend la route</span></div>
+          <div class="role"><span class="role-num">5</span><span>réécrit le résultat dans le CRM</span></div>
+        </div>
+        <p class="role-boundary">Orchestre et trace : ne décide jamais de la route.</p>
       </div>
     </div>
 
     ${arrowH()}
 
-    <div class="zone anim" ${a(0.25)} style="width:27%">
-      ${zoneHead('03', 'Intelligence')}
+    <div class="zone anim" ${a(0.23)} style="width:30%">
+      ${zoneHead('03', 'Intelligence · LeadGuard')}
       <div class="zone-body">
-        ${node({ name: 'cpu', title: 'LeadGuard API', caption: 'Python · FastAPI · analyse et validation' })}
-        ${node({ name: 'sparkles', title: 'DeepSeek', caption: 'Extraction structurée, JSON validé' })}
-        ${node({ name: 'list-checks', title: 'Règles déterministes', caption: 'Confiance, ville, service, consentement', badge: 'décision', tone: 'node-accent' })}
+        ${node({ name: 'cpu', title: 'FastAPI', caption: 'Le service appelé par n8n', badge: 'Python' })}
+        <div class="roles">
+          ${roles([
+            'recevable + idempotence (rejeu sans doublon)',
+            'appelle le LLM, valide le JSON reçu',
+            'applique les règles, journalise l’audit',
+          ])}
+        </div>
+        ${node({ name: 'sparkles', title: 'DeepSeek', caption: 'Extraction structurée' })}
+        <div class="roles">${roles(['lit la demande libre et en sort des champs'])}</div>
+        ${node({ name: 'list-checks', title: 'Règles déterministes', caption: 'confiance, ville, service, consentement', badge: 'décision', tone: 'node-accent' })}
+        <p class="role-boundary">Seule brique qui choisit la route — et elle n’invente jamais un prix.</p>
       </div>
     </div>
 
     ${arrowH()}
 
-    <div class="zone anim" ${a(0.35)} style="width:20%">
+    <div class="zone anim" ${a(0.32)} style="width:19%">
       ${zoneHead('04', 'Actions CRM')}
       <div class="zone-body">
-        ${node({ name: 'database', title: 'GoHighLevel', caption: 'Retour dans le CRM', badge: 'REAL' })}
-        <div class="row wrap" style="gap:0.3cqw">
-          ${['champs IA', 'tags', 'étape', 'note', 'tâche']
-            .map((tag) => `<span class="chip" style="padding:0.14em 0.55em">${tag}</span>`)
-            .join('')}
+        ${node({ name: 'database', title: 'Retour GoHighLevel', caption: 'Écritures préparées par n8n', badge: 'REAL' })}
+        <div class="roles">
+          ${roles([
+            'champs IA remplis',
+            'tags de qualification',
+            'étape du pipeline déplacée',
+            'note d’analyse + tâche commerciale',
+          ])}
         </div>
-        <p class="node-note">Aucun message client n’est envoyé par cette automatisation.</p>
+        <p class="role-boundary">Aucun message ne part au prospect.</p>
       </div>
     </div>
   </div>
 
-  <div class="band-dark anim mt-auto" ${a(0.55)}>
+  <div class="band-dark anim" ${a(0.5)} style="margin-top:1.4cqw">
     ${icon('tags', 'icon')}
     <p class="t-body" style="margin:0">
-      L’IA interprète la demande. <span class="accent">Les règles déterministes décident.</span>
-      GoHighLevel reste le CRM.
+      GoHighLevel collecte et conserve · n8n orchestre · LeadGuard analyse et contrôle ·{' '}
+      <span class="accent">les règles décident</span>
     </p>
-    <span class="mono t-small" style="color:rgba(255,255,255,0.72);margin-left:auto">form → n8n → FastAPI → n8n → GHL</span>
   </div>`
 }
 
@@ -455,33 +487,41 @@ export function slide07() {
   const bands = [
     {
       label: 'Canaux',
-      hint: 'Entrée',
+      role: 'Collectent la demande',
+      boundary: 'ne qualifient pas',
       cards: [
-        ['mail', 'E-mail', 'Demandes clients'],
+        ['mail', 'E-mail', 'Demande écrite'],
         ['boxes', 'Formulaire', 'Site web'],
         ['phone', 'Téléphone', 'Appel qualifié'],
         ['message-square', 'CRM', 'Odoo / autres'],
       ],
     },
-    { label: 'Orchestration', hint: 'Transport', cards: [['workflow', 'n8n', 'Routage, reprise, journalisation']], wide: true },
+    {
+      label: 'Orchestration',
+      role: 'n8n : reçoit, route, réessaie, journalise',
+      boundary: 'ne décide pas des prix',
+      cards: [['workflow', 'n8n', 'Un workflow par étape du parcours']],
+      wide: true,
+    },
     {
       label: 'Intelligence',
-      hint: 'Analyse',
+      role: 'QuoteFlow AI : structure et contrôle',
+      boundary: 'ne fixe jamais un prix',
       cards: [
         ['cpu', 'QuoteFlow AI', 'Python · FastAPI'],
         ['sparkles', 'DeepSeek', 'GLM en fallback'],
-        ['scan-text', 'Extraction structurée', 'JSON validé'],
+        ['scan-text', 'Extraction', 'JSON validé'],
         ['list-checks', 'Règles métier', 'Déterministes'],
       ],
-      tone: 'node-accent',
     },
     {
       label: 'Odoo 19',
-      hint: 'Source de vérité',
+      role: 'Source de vérité métier',
+      boundary: 'ne qualifie pas la demande',
       cards: [
         ['boxes', 'CRM', ''],
         ['users', 'Client', ''],
-        ['clipboard-list', 'Visite technique', ''],
+        ['clipboard-list', 'Visite', ''],
         ['file-text', 'Devis', ''],
         ['file-check', 'Contrat', ''],
         ['mail', 'Mail center', ''],
@@ -490,7 +530,8 @@ export function slide07() {
     },
     {
       label: 'Services',
-      hint: 'Externe',
+      role: 'Signature · Stripe · SMTP/IMAP',
+      boundary: 'ne stockent pas le dossier',
       cards: [
         ['server', 'SMTP / IMAP', 'OVH · Titan · Hostinger'],
         ['pen-tool', 'Signature', 'Électronique'],
@@ -502,38 +543,42 @@ export function slide07() {
   return `
   ${head({
     kicker: 'Q2 · Architecture',
-    title: 'QuoteFlow AI — architecture en couches',
-    right: `<p class="t-small muted" style="max-width:28cqw;text-align:right">
-      Chaque couche a une responsabilité unique. Aucune ne décide à la place d’Odoo.
+    title: 'QuoteFlow AI — qui fait quoi',
+    right: `<p class="t-small muted" style="max-width:26cqw;text-align:right">
+      Cinq couches : chacune a un rôle et une limite écrite.
     </p>`,
   })}
 
-  <div class="stack mt-2 grow" style="justify-content:center;gap:1.05cqw">
+  <div class="stack mt-2" style="gap:0.9cqw">
     ${bands
       .map(
         (band, index) => `
-      <div class="grid anim" ${a(0.05 + index * 0.09)} style="grid-template-columns:11cqw 1fr;align-items:center;gap:0.9cqw">
+      <div class="grid anim" ${a(0.05 + index * 0.08)} style="grid-template-columns:12cqw 1fr 9cqw;align-items:center;gap:0.9cqw">
         <div style="text-align:right">
           <p class="t-label">${band.label}</p>
-          <p class="t-small muted">${band.hint}</p>
+          <p class="t-small muted" style="margin-top:0.2cqw">${band.role}</p>
         </div>
         <div class="grid" style="grid-template-columns:repeat(${band.cards.length},minmax(0,1fr));gap:0.45cqw;${
           band.highlight ? 'border:1px solid var(--line-strong);border-radius:0.9cqw;padding:0.5cqw;background:var(--surface)' : ''
         }">
           ${band.cards
             .map(([ic, title, caption]) =>
-              node({
-                name: ic,
-                title,
-                caption,
-                tone: band.highlight ? 'node-accent' : band.tone === 'node-accent' ? '' : '',
-              }),
+              node({ name: ic, title, caption, tone: band.highlight ? 'node-accent' : '' }),
             )
             .join('')}
         </div>
+        <p class="t-small muted" style="font-style:italic;line-height:1.25">${band.boundary}</p>
       </div>`,
       )
       .join('')}
+  </div>
+
+  <div class="band-dark anim" ${a(0.5)} style="margin-top:1.2cqw">
+    ${icon('layers', 'icon')}
+    <p class="t-body" style="margin:0">
+      n8n orchestre · QuoteFlow structure · <span class="accent">Odoo reste la source de vérité</span> ·
+      la signature et le paiement sont externes
+    </p>
   </div>`
 }
 

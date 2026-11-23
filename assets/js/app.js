@@ -230,6 +230,23 @@ function updateRehearsal() {
 }
 
 /* ------------------------------------------------------------- speaker mode */
+function scalePreview() {
+  const wrapper = document.querySelector('.speaker-preview')
+  if (!wrapper) return
+  const stage = wrapper.querySelector('.stage')
+  if (!stage) return
+  const width = wrapper.clientWidth
+  if (!width) return
+  const scale = width / 1920
+  stage.style.transform = `scale(${scale})`
+  wrapper.style.height = `${1080 * scale}px`
+}
+
+if (!window.__previewResizeBound) {
+  window.addEventListener('resize', () => scalePreview())
+  window.__previewResizeBound = true
+}
+
 function renderSpeaker() {
   const slide = meta()
   const note = NOTES[state.index]
