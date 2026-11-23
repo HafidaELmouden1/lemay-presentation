@@ -121,7 +121,7 @@ export function slide10() {
     ${icon('badge-check', 'icon')}
     <span class="t-body" style="font-weight:600">Contrat actif</span>
     ${icon('arrow-right', 'icon muted')}
-    <span class="t-small" style="color:#b9beab">Planification des interventions · suivi · récurrences</span>
+    <span class="t-small" style="color:rgba(255,255,255,0.78)">Planification des interventions · suivi · récurrences</span>
   </div>
 
   <div class="foot" style="align-items:center">
@@ -358,7 +358,7 @@ export function slide14() {
     right: `<div class="row" style="gap:0.5cqw">${badge('REAL')}<span class="t-small muted">Developer Sandbox</span></div>`,
   })}
 
-  <div class="grid g2 mt-2 grow" style="align-items:stretch">
+  <div class="grid g2 mt-2 grow" style="align-items:start">
     <div class="card pad anim" ${a(0.1)}>
       <div class="row between">
         <span class="t-label muted">Ce qui est déjà construit</span>
@@ -425,8 +425,10 @@ export function slide15() {
 
   return `
   <p class="kicker t-label">Conclusion</p>
-  <h1 class="t-display mt-3 anim" ${a(0.05)} style="max-width:74cqw">
-    CRM <span class="muted">·</span> Automation <span class="muted">·</span> AI <span class="muted">·</span> Reliability
+  <h1 class="t-display mt-3 anim" ${a(0.05)}>
+    CRM <span style="color:var(--accent)">·</span> Automation
+    <span style="color:var(--accent)">·</span> AI<br />
+    <span style="color:var(--accent)">Reliability</span>
   </h1>
 
   <div class="grid g4 mt-4">

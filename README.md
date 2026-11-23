@@ -92,11 +92,27 @@ vraies captures, déposez-les dans `assets/screenshots/` (copié par le build) p
 
 Ne jamais publier : jetons, clés API, e-mails réels, numéros réels, noms de clients.
 
+## Charte graphique
+
+La palette est relevée sur **lemayconsulting.com** (styles calculés du site, pas une
+interprétation) :
+
+| Rôle | Valeur | Où c'est mesuré |
+| --- | --- | --- |
+| Fond principal | `#0d0e10` / `#15171b` | sections d'accueil (`#000000`, `#14161a`) |
+| Accent unique | `#ff0a17` | boutons « Planifier une démo » |
+| Texte | `#f4f5f6` | titres du site (`#ffffff`) |
+| Typographie | **Montserrat** | corps du site (titres : Linik Sans, non distribué) |
+
+Le rouge ne sert jamais de décoration : il porte un état (route retenue, étape finale,
+règle décisive) ou la phrase clé. Tout est centralisé dans les jetons de `assets/css/base.css` —
+changer `--accent` suffit à rebasculer la présentation.
+
 ## Accessibilité et lisibilité
 
 - Corps de texte ≥ 17 px à 1920×1080 (`clamp()` sur `cqw`), titres à l'échelle du cadre.
-- Contraste : encre `#14150f` sur papier `#f7f5f0` ; le vert lime ne porte jamais une information
-  seul (il double un libellé ou une icône).
+- Contraste : texte `#f4f5f6` sur fond `#0d0e10` (ratio > 15:1) ; le rouge `#ff0a17` ne porte
+  jamais une information seul — il double toujours un libellé ou une icône.
 - `prefers-reduced-motion` coupe toutes les animations d'entrée.
 - Les couleurs de statut sont toujours accompagnées d'un texte (`REAL`, `MOCK`).
 

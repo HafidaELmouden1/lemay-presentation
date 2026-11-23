@@ -103,9 +103,9 @@ function hud() {
   return `
     <div class="hud" id="hud">
       <div class="hud-left">
-        <strong>${slide.section}</strong>
-        <span>·</span>
-        <span>${slide.hud}</span>
+        ${slide.section === slide.hud
+          ? `<strong>${slide.section}</strong>`
+          : `<strong>${slide.section}</strong><span>·</span><span>${slide.hud}</span>`}
       </div>
       <div class="progress"><span style="width:${percent}%"></span></div>
       <div class="counter">${String(state.index).padStart(2, '0')} / ${String(LAST).padStart(2, '0')}</div>

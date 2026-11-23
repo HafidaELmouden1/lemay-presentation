@@ -3,34 +3,42 @@
    warm off-white paper, charcoal ink, one lime accent, thin grey rules.
    ========================================================================= */
 :root {
-  --paper: #f7f5f0;
-  --paper-2: #efede5;
-  --surface: #fffefb;
-  --ink: #14150f;
-  --ink-soft: #3d3e35;
-  --muted: #75766b;
-  --line: #e0ddd2;
-  --line-strong: #cdc9ba;
+  /* Palette relevée sur le site de l'agence : fonds anthracite et noir,
+     rouge #FF0A17 en accent unique, blanc cassé pour le texte.
+     Sources : backgroundColor calculés sur lemayconsulting.com
+     (sections #000000 / #14161a, CTA #ff0a17, texte #ffffff). */
+  --paper: #0d0e10;
+  --paper-2: #17191d;
+  --surface: #15171b;
+  --surface-2: #1c1f24;
 
-  --accent: #c9f25c;
-  --accent-deep: #9ed321;
-  --accent-ink: #23280f;
+  --ink: #f4f5f6;
+  --ink-soft: #c9ced4;
+  --muted: #8b929b;
 
-  --night: #12130f;
-  --night-2: #1b1d16;
-  --night-line: #33362b;
-  --night-text: #eceae0;
-  --night-muted: #a9ae9f;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.24);
 
-  --ok-bg: #e8f6dd;
-  --ok-fg: #2f5c22;
-  --warn-bg: #fdf3d7;
-  --warn-fg: #7a5c0a;
-  --alert-bg: #fbe5e5;
-  --alert-fg: #8b3b3b;
+  --accent: #ff0a17;
+  --accent-deep: #c80712;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(255, 10, 23, 0.12);
 
-  --font: 'Inter Tight', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  --display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --night: #050607;
+  --night-2: #14161a;
+  --night-line: #2a2d33;
+  --night-text: #f4f5f6;
+  --night-muted: #9aa0a8;
+
+  --ok-bg: rgba(70, 200, 120, 0.14);
+  --ok-fg: #57d68a;
+  --warn-bg: rgba(245, 200, 90, 0.14);
+  --warn-fg: #f0c463;
+  --alert-bg: rgba(255, 10, 23, 0.14);
+  --alert-fg: #ff7a84;
+
+  --font: 'Montserrat', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --display: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
   --mono: ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, monospace;
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -104,12 +112,27 @@ body.mode-print {
   color: var(--night-text);
 }
 
+/* Inverse : quelques slides claires, comme les blocs blancs de leur site. */
+.slide[data-tone='light'] {
+  background: #f4f4f5;
+  color: #14161a;
+}
+
+.slide[data-tone='light'] .muted {
+  color: #6b7079;
+}
+
+.slide[data-tone='light'] .t-lead,
+.slide[data-tone='light'] .soft {
+  color: #33373d;
+}
+
 /* ------------------------------------------------------------ typography -- */
 .t-display {
   font-family: var(--display);
-  font-weight: 400;
-  letter-spacing: -0.015em;
-  line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.94;
   font-size: clamp(1.7rem, 5.2cqw, 6rem);
 }
 
@@ -351,15 +374,18 @@ body.mode-print {
   align-items: center;
   gap: 1cqw;
   border-radius: 0.9cqw;
-  background: var(--night);
-  color: var(--night-text);
+  background: var(--accent);
+  color: #fff;
   padding: 0.9cqw 1.4cqw;
   font-size: clamp(0.72rem, 1cqw, 1.02rem);
 }
 
 .band-dark strong,
 .band-dark .accent {
-  color: var(--accent);
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25em;
 }
 
 /* --------------------------------------------------------------- motion --- */

@@ -51,11 +51,12 @@ export function slide01() {
 
   <div class="grid g-60-40 mt-3 grow" style="align-items:stretch">
     <div class="col">
-      <h1 class="t-display anim" ${a(0.05)} style="margin:0;max-width:34cqw">
-        CRM <span class="muted">·</span> Automation <span class="muted">·</span><br />AI Integration
+      <h1 class="t-display anim" ${a(0.05)} style="margin:0">
+        CRM <span style="color:var(--accent)">·</span> Automation<br />
+        AI Integration
       </h1>
 
-      <div class="anim" ${a(0.12)} style="max-width:40cqw">
+      <div class="anim" ${a(0.12)} style="max-width:40cqw;margin-top:1.2cqw">
         <p class="t-lead">
           Entretien Lemay Consulting / Optimo CRM — rôle CRM, automatisation et intégration IA.
         </p>
@@ -226,7 +227,7 @@ export function slide03() {
       L’IA interprète la demande. <span class="accent">Les règles déterministes décident.</span>
       GoHighLevel reste le CRM.
     </p>
-    <span class="mono t-small" style="color:#8d9284;margin-left:auto">form → n8n → FastAPI → n8n → GHL</span>
+    <span class="mono t-small" style="color:rgba(255,255,255,0.72);margin-left:auto">form → n8n → FastAPI → n8n → GHL</span>
   </div>`
 }
 
@@ -567,9 +568,9 @@ export function slide08() {
       .map(
         ([label, color], index) => `
       <span class="row" style="gap:0.35cqw">
-        <span style="width:0.7cqw;height:0.7cqw;border-radius:2px;background:${color};border:1px solid ${
-          index === 4 ? 'var(--night-line)' : 'var(--line-strong)'
-        }"></span>
+        <span style="width:0.7cqw;height:0.7cqw;border-radius:2px;background:${
+          index === 4 ? 'var(--accent)' : 'rgba(255,255,255,0.22)'
+        };border:1px solid ${index === 4 ? 'var(--accent-deep)' : 'rgba(255,255,255,0.4)'}"></span>
         <span class="t-label muted">${label}</span>
       </span>`,
       )
@@ -582,7 +583,7 @@ export function slide08() {
       .map(
         ([n, label, caption, cls], index) => `
       <div class="tl-item">
-        <div class="tl-card ${cls}" style="padding:0.85cqw 0.7cqw;min-height:15.5cqw">
+        <div class="tl-card ${cls}" style="padding:0.85cqw 0.7cqw;min-height:11cqw">
           <p class="mono t-label" style="opacity:0.55">${n}</p>
           <p class="t-small" style="font-weight:600;line-height:1.25;margin-top:0.45cqw">${label}</p>
           <p class="t-small" style="opacity:0.68;margin-top:0.2cqw;font-size:0.66rem">${caption}</p>
