@@ -1,0 +1,16 @@
+{
+  "name": "lemay-presentation",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Présentation web d'entretien — CRM, automatisation et intégration IA. Statique, sans dépendance.",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "serve": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs dist 4173"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

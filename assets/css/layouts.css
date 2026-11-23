@@ -1,0 +1,686 @@
+/* =========================================================================
+   Layout primitives used by the slides.
+   ========================================================================= */
+
+/* ------------------------------------------------------------------ grids -- */
+.grid {
+  display: grid;
+  gap: 1cqw;
+}
+
+.g2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.g3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.g4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.g5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.g6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+.g-1-1 {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+.g-58-42 {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+}
+.g-60-40 {
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
+}
+.g-40-60 {
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.7cqw;
+}
+
+.row-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7cqw;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55cqw;
+}
+
+.stack-lg {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1cqw;
+}
+
+.mt-auto {
+  margin-top: auto;
+}
+
+.mt-1 {
+  margin-top: 0.6cqw;
+}
+.mt-2 {
+  margin-top: 1.1cqw;
+}
+.mt-3 {
+  margin-top: 1.7cqw;
+}
+.mt-4 {
+  margin-top: 2.4cqw;
+}
+
+.grow {
+  flex: 1;
+  min-height: 0;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.icon {
+  width: 1.15cqw;
+  height: 1.15cqw;
+  flex: none;
+  stroke-width: 1.6;
+  stroke: currentColor;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon-sm {
+  width: 0.95cqw;
+  height: 0.95cqw;
+}
+
+.icon-lg {
+  width: 1.4cqw;
+  height: 1.4cqw;
+}
+
+/* --------------------------------------------------------- architecture --- */
+.arch {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5cqw;
+  min-height: 0;
+  flex: 1;
+}
+
+.zone {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55cqw;
+  min-width: 0;
+  justify-content: center;
+}
+
+.zone-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5cqw;
+  padding-bottom: 0.35cqw;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+/* A zone is a labelled column of cards, not a box: empty borders read as
+   unfinished, so the column hugs its content and centres it vertically. */
+.zone-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55cqw;
+  justify-content: flex-start;
+  flex: 0 1 auto;
+}
+
+/* a single architecture block */
+.node {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6cqw;
+  padding: 0.75cqw 0.9cqw;
+  border-radius: 0.8cqw;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  min-width: 0;
+}
+
+.node-title {
+  font-size: clamp(0.76rem, 1.06cqw, 1.1rem);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.45cqw;
+}
+
+.node-caption {
+  font-size: clamp(0.64rem, 0.86cqw, 0.92rem);
+  color: var(--muted);
+  line-height: 1.35;
+  margin: 0.15cqw 0 0;
+}
+
+.node-badge {
+  font-size: clamp(0.44rem, 0.52cqw, 0.58rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  background: var(--paper-2);
+  border-radius: 999px;
+  padding: 0.12em 0.5em;
+  white-space: nowrap;
+}
+
+.node-accent {
+  background: var(--accent);
+  border-color: var(--accent-deep);
+  color: var(--accent-ink);
+}
+
+.node-accent .node-caption,
+.node-accent .node-badge {
+  color: #3d4a12;
+}
+
+.node-accent .node-badge {
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.node-dark {
+  background: var(--night-2);
+  border-color: var(--night-line);
+  color: var(--night-text);
+}
+
+.node-dark .node-caption {
+  color: var(--night-muted);
+}
+
+.node-dark .icon {
+  color: var(--accent);
+}
+
+.node-note {
+  font-size: clamp(0.64rem, 0.86cqw, 0.92rem);
+  line-height: 1.4;
+  color: var(--ink-soft);
+  background: var(--paper-2);
+  border-radius: 0.55cqw;
+  padding: 0.55cqw 0.7cqw;
+}
+
+.arrow-h,
+.arrow-v {
+  display: grid;
+  place-items: center;
+  color: var(--line-strong);
+  flex: none;
+}
+
+.arrow-h {
+  width: 2cqw;
+}
+
+.arrow-h svg,
+.arrow-v svg {
+  width: 1.15cqw;
+  height: 1.15cqw;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ------------------------------------------------------------- timeline --- */
+.timeline {
+  display: flex;
+  align-items: stretch;
+  gap: 0.45cqw;
+}
+
+.tl-item {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45cqw;
+}
+
+.tl-card {
+  flex: 1;
+  border-radius: 0.7cqw;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  padding: 0.7cqw 0.6cqw;
+}
+
+.tl-phase {
+  background: var(--paper-2);
+}
+.tl-tech {
+  background: #eef3e2;
+  border-color: #cfdcae;
+}
+.tl-contract {
+  background: #e9efe9;
+  border-color: #c2d3c4;
+}
+.tl-ops {
+  background: var(--night-2);
+  border-color: var(--night-line);
+  color: var(--night-text);
+}
+
+.tl-bar {
+  height: 0.28cqw;
+  border-radius: 999px;
+  background: var(--line-strong);
+}
+
+.tl-bar-accent {
+  background: var(--accent-deep);
+}
+
+/* --------------------------------------------------------------- states --- */
+.route {
+  display: flex;
+  flex-direction: column;
+  padding: 1.4cqw;
+  border-radius: 1.05cqw;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.route-flat {
+  background: var(--paper-2);
+  border-color: var(--line-strong);
+}
+
+.big-number {
+  font-family: var(--mono);
+  font-size: clamp(2rem, 4.2cqw, 4.4rem);
+  line-height: 1;
+}
+
+.status-dot {
+  width: 0.55cqw;
+  height: 0.55cqw;
+  border-radius: 999px;
+  flex: none;
+}
+
+/* =========================================================================
+   Chrome: HUD, controls, speaker panel, rehearsal overlay, print.
+   ========================================================================= */
+.hud {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 1.2cqw;
+  padding: 1.1cqw 5.6cqw 1.3cqw;
+  font-size: clamp(0.52rem, 0.62cqw, 0.68rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: opacity 0.35s var(--ease);
+  pointer-events: none;
+}
+
+.hud .hud-left {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}
+
+.hud .hud-left strong {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.hud .progress {
+  flex: 1;
+  height: 2px;
+  background: var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.hud .progress span {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+  transition: width 0.4s var(--ease);
+}
+
+.hud .counter {
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+}
+
+.hud-hidden {
+  opacity: 0;
+}
+
+.controls {
+  position: absolute;
+  right: 5.6cqw;
+  bottom: 3.4cqw;
+  z-index: 21;
+  display: flex;
+  gap: 0.4cqw;
+  transition: opacity 0.3s var(--ease);
+}
+
+.controls button {
+  width: 2.4cqw;
+  height: 2.4cqw;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition:
+    background 0.2s var(--ease),
+    border-color 0.2s var(--ease);
+}
+
+.controls button:hover {
+  background: var(--paper-2);
+  border-color: var(--ink-soft);
+}
+
+.controls svg {
+  width: 0.95cqw;
+  height: 0.95cqw;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.controls-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------- speaker mode --- */
+.speaker-shell {
+  min-height: 100vh;
+  background: var(--paper-2);
+  padding: 2.2rem;
+  font-family: var(--font);
+  color: var(--ink);
+  overflow: auto;
+}
+
+.speaker-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.speaker-badge {
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.speaker-clock {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+}
+
+.speaker-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 1.6rem;
+  align-items: start;
+}
+
+.speaker-preview {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  background: var(--paper);
+  box-shadow: 0 24px 60px -30px rgba(20, 21, 15, 0.35);
+}
+
+.speaker-preview .stage {
+  width: 100%;
+  height: auto;
+}
+
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.note-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.1rem 1.2rem;
+}
+
+.note-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+}
+
+.speech {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--ink);
+}
+
+.key-line {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.note-list {
+  margin: 0;
+  padding-left: 1.05rem;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.note-list li + li {
+  margin-top: 0.3rem;
+}
+
+.next-cue {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+.timing-row {
+  display: flex;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+}
+
+.timing-cell {
+  min-width: 6.5rem;
+}
+
+/* -------------------------------------------------------------- rehearsal -- */
+.rehearsal-overlay {
+  position: absolute;
+  bottom: 6.4cqw;
+  right: 2.2cqw;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5cqw;
+  padding: 0.9cqw 1.1cqw;
+  border-radius: 0.7cqw;
+  background: rgba(18, 19, 15, 0.92);
+  color: #f2f0e8;
+  font-family: var(--mono);
+  font-size: clamp(0.6rem, 0.78cqw, 0.84rem);
+  box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.6);
+  min-width: 12cqw;
+}
+
+.rehearsal-overlay .ro-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.2cqw;
+}
+
+.rehearsal-overlay .ro-label {
+  color: #9aa08f;
+  font-size: 0.86em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rehearsal-overlay .ro-warn {
+  color: #f5d76e;
+}
+
+.rehearsal-overlay .ro-alert {
+  color: #ff8f8f;
+}
+
+.rehearsal-overlay .ro-ok {
+  color: var(--accent);
+}
+
+/* ---------------------------------------------------------------- print --- */
+.print-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  align-items: center;
+}
+
+.print-stack .stage {
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+/* ------------------------------------------------------------- scaffold --- */
+.help {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: none;
+  place-items: center;
+  background: rgba(18, 19, 15, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.help[data-open='true'] {
+  display: grid;
+}
+
+.help-card {
+  background: var(--surface);
+  border-radius: 1cqw;
+  border: 1px solid var(--line-strong);
+  padding: 1.6cqw 1.8cqw;
+  width: 46cqw;
+  box-shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.5);
+}
+
+.help-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55cqw 1.6cqw;
+  margin-top: 1cqw;
+}
+
+.help-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1cqw;
+  font-size: clamp(0.62rem, 0.8cqw, 0.86rem);
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+  padding: 0.35cqw 0;
+}
+
+kbd {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: 0.3cqw;
+  padding: 0.1em 0.45em;
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+/* ------------------------------------------------- speaker preview scaling -- */
+/* The preview reuses the real stage markup: same slide, scaled to the panel. */
+.stage-preview {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 0;
+}
+
+@media (max-width: 1100px) {
+  .speaker-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
