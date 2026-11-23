@@ -427,11 +427,154 @@ body.mode-print {
 }
 
 /* ----------------------------------------------------------------- print -- */
+
+/* ============================== notes document (A4) ====================== */
+.mode-notes {
+  background: #fff;
+  overflow: auto;
+}
+
+.notes-doc {
+  width: 210mm;
+  margin: 0 auto;
+  padding: 16mm 15mm 18mm;
+  background: #fff;
+  color: #14161a;
+  font-family: var(--font);
+  font-size: 10.5pt;
+  line-height: 1.5;
+}
+
+.nd-cover {
+  border-bottom: 3px solid #ff0a17;
+  padding-bottom: 8mm;
+  margin-bottom: 8mm;
+}
+
+.nd-kicker {
+  font-size: 8pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #ff0a17;
+  margin: 0 0 3mm;
+}
+
+.nd-cover h1 {
+  font-size: 24pt;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.nd-cover-sub {
+  font-size: 11pt;
+  margin: 3mm 0 0;
+  color: #3a3f46;
+}
+
+.nd-cover-meta {
+  font-size: 9pt;
+  margin: 1.5mm 0 0;
+  color: #6b7079;
+  font-family: var(--mono);
+}
+
+.nd-slide {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  border-top: 1px solid #dcdfe4;
+  padding: 6mm 0 7mm;
+}
+
+.nd-head {
+  display: flex;
+  gap: 4mm;
+  align-items: baseline;
+}
+
+.nd-num {
+  font-family: var(--mono);
+  font-size: 13pt;
+  font-weight: 700;
+  color: #ff0a17;
+}
+
+.nd-head h2 {
+  font-size: 13pt;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.nd-meta {
+  font-size: 8.5pt;
+  color: #6b7079;
+  margin: 1mm 0 0;
+}
+
+.nd-guide {
+  font-size: 9pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #14161a;
+  margin: 4mm 0 2mm;
+}
+
+.nd-speech {
+  font-size: 11pt;
+  line-height: 1.62;
+  margin: 0;
+}
+
+.nd-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6mm;
+  margin-top: 4mm;
+}
+
+.nd-label {
+  font-size: 7.5pt;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #6b7079;
+  margin: 0 0 1mm;
+}
+
+.nd-key,
+.nd-next {
+  margin: 0;
+  font-size: 9.5pt;
+}
+
+.nd-key {
+  font-weight: 600;
+}
+
+.nd-slide ul {
+  margin: 0;
+  padding-left: 4mm;
+  font-size: 9.5pt;
+}
+
+.nd-slide li + li {
+  margin-top: 0.8mm;
+}
+
 @media print {
-  @page {
-    size: 1920px 1080px;
-    margin: 0;
+  .mode-notes {
+    background: #fff;
   }
+
+  .notes-doc {
+    width: auto;
+    padding: 0;
+  }
+}
+
+@media print {
 
   body {
     background: #fff;
@@ -443,9 +586,24 @@ body.mode-print {
     display: none !important;
   }
 
+  html,
+  body.mode-print {
+    height: auto;
+    min-height: 0;
+  }
+
   .print-stack .stage {
-    width: 1920px;
-    height: 1080px;
+    width: 100%;
+    height: calc(100vh - 0.6px);
+    break-after: page;
     page-break-after: always;
   }
+
+  .print-stack .stage:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
 }
+
+/* La règle @page est injectée par le mode actif (voir app.js) : une seule
+   règle anonyme, donc aucun saut de page parasite entre deux formats. */

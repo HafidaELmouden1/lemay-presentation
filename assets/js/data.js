@@ -4,21 +4,21 @@
  */
 
 export const SLIDES = [
-  { id: 1, section: 'Intro', hud: 'Intro', seconds: 20 },
-  { id: 2, section: 'Q1 · LeadGuard AI', hud: 'Q1 · Problème', seconds: 30 },
-  { id: 3, section: 'Q1 · LeadGuard AI', hud: 'Q1 · Architecture', seconds: 50 },
-  { id: 4, section: 'Q1 · LeadGuard AI', hud: 'Q1 · Parcours', seconds: 40 },
-  { id: 5, section: 'Q1 · LeadGuard AI', hud: 'Q1 · Contrôle humain', seconds: 30 },
-  { id: 6, section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Cycle', seconds: 25 },
-  { id: 7, section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Architecture', seconds: 45 },
-  { id: 8, section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Parcours', seconds: 40 },
-  { id: 9, section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Visite + IA', seconds: 35 },
-  { id: 10, section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Devis → contrat', seconds: 35 },
-  { id: 11, section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Mail center', seconds: 20 },
-  { id: 12, section: 'Q3 · Problème', hud: 'Q3 · Cause racine', seconds: 50 },
-  { id: 13, section: 'Q4 · Ownership', hud: 'Q4 · Bout en bout', seconds: 50 },
-  { id: 14, section: 'Q5 · GoHighLevel', hud: 'Q5 · Adaptation', seconds: 50 },
-  { id: 15, section: 'Conclusion', hud: 'Conclusion', seconds: 25 },
+  { id: 1, title: 'Introduction', section: 'Intro', hud: 'Intro', seconds: 20 },
+  { id: 2, title: 'LeadGuard AI — le problème métier', section: 'Q1 · LeadGuard AI', hud: 'Q1 · Problème', seconds: 30 },
+  { id: 3, title: 'LeadGuard AI — architecture du système', section: 'Q1 · LeadGuard AI', hud: 'Q1 · Architecture', seconds: 50 },
+  { id: 4, title: 'Un lead dans le workflow complet', section: 'Q1 · LeadGuard AI', hud: 'Q1 · Parcours', seconds: 40 },
+  { id: 5, title: 'Contrôle humain', section: 'Q1 · LeadGuard AI', hud: 'Q1 · Contrôle humain', seconds: 30 },
+  { id: 6, title: 'QuoteFlow AI + Odoo 19', section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Cycle', seconds: 25 },
+  { id: 7, title: 'QuoteFlow AI — architecture en couches', section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Architecture', seconds: 45 },
+  { id: 8, title: 'De la demande au contrat actif', section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Parcours', seconds: 40 },
+  { id: 9, title: 'Visite technique et IA', section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Visite + IA', seconds: 35 },
+  { id: 10, title: 'Devis, signature, paiement', section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Devis → contrat', seconds: 35 },
+  { id: 11, title: 'Mail center multi-marque', section: 'Q2 · QuoteFlow AI + Odoo', hud: 'Q2 · Mail center', seconds: 20 },
+  { id: 12, title: 'Corriger la cause, pas le symptôme', section: 'Q3 · Problème', hud: 'Q3 · Cause racine', seconds: 50 },
+  { id: 13, title: 'Du besoin utilisateur à la production', section: 'Q4 · Ownership', hud: 'Q4 · Bout en bout', seconds: 50 },
+  { id: 14, title: 'Devenir opérationnelle sur GoHighLevel', section: 'Q5 · GoHighLevel', hud: 'Q5 · Adaptation', seconds: 50 },
+  { id: 15, title: 'Conclusion', section: 'Conclusion', hud: 'Conclusion', seconds: 25 },
 ]
 
 export const TOTAL_SECONDS = SLIDES.reduce((total, slide) => total + slide.seconds, 0)

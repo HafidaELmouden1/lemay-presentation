@@ -71,9 +71,9 @@ function parseRoute() {
   const raw = location.hash.replace(/^#\/?/, '') || location.pathname.replace(/^\/+/, '')
   const parts = raw.split('/').filter(Boolean)
   let mode = 'presentation'
-  if (['speaker', 'rehearse', 'print'].includes(parts[0])) mode = parts[0]
+  if (['speaker', 'rehearse', 'print', 'notes'].includes(parts[0])) mode = parts[0]
   const index = Number(parts[1] ?? parts[0])
-  return { mode: mode === 'print' ? 'print' : mode, index: Number.isFinite(index) && index > 0 ? index : 1 }
+  return { mode: mode === 'print' || mode === 'notes' ? mode : mode, index: Number.isFinite(index) && index > 0 ? index : 1 }
 }
 
 function setMode(mode, index = state.index) {
@@ -92,6 +92,7 @@ function setMode(mode, index = state.index) {
 /* ---------------------------------------------------------------- rendering */
 function render() {
   if (state.mode === 'print') return renderPrint()
+  if (state.mode === 'notes') return renderNotes()
   if (state.mode === 'speaker') return renderSpeaker()
   if (state.mode === 'rehearse') return renderRehearsal()
   return renderPresentation()
@@ -302,12 +303,89 @@ function renderSpeaker() {
   applyDelays()
 }
 
+
+/* The print page size depends on the document, and @page cannot be scoped to a
+ * selector — so the active mode injects the one rule it needs.
+ */
+function setPageRule(rule) {
+  let style = document.getElementById('page-rule')
+  if (!style) {
+    style = document.createElement('style')
+    style.id = 'page-rule'
+    document.head.appendChild(style)
+  }
+  style.textContent = rule
+}
+
+/* -------------------------------------------------------------- notes doc --
+ * The full script as a document, not slides: this is what gets exported to PDF
+ * so she can rehearse on paper. One block per slide, page-break aware.
+ */
+function renderNotes() {
+  body.className = 'mode-notes'
+  setPageRule('@page { size: A4; margin: 12mm 11mm 14mm; }')
+  root.className = ''
+  const rows = SLIDES.map((slide) => {
+    const note = NOTES[slide.id]
+    const cue = CUE_TIMES[slide.id - 1]
+    return `
+      <section class="nd-slide">
+        <header class="nd-head">
+          <span class="nd-num">${String(slide.id).padStart(2, '0')}</span>
+          <div>
+            <h2>${slide.title}</h2>
+            <p class="nd-meta">${slide.section} · cible ${duration(slide.seconds)} · début à ${formatClock(cue)}</p>
+          </div>
+        </header>
+
+        <p class="nd-guide">${note.guide}</p>
+        <p class="nd-speech">${note.speech}</p>
+
+        <div class="nd-cols">
+          <div>
+            <p class="nd-label">Phrase clé</p>
+            <p class="nd-key">« ${note.key} »</p>
+          </div>
+          <div>
+            <p class="nd-label">Transition</p>
+            <p class="nd-next">${note.next}</p>
+          </div>
+        </div>
+
+        <div class="nd-cols">
+          <div>
+            <p class="nd-label">À montrer</p>
+            <ul>${note.show.map((item) => `<li>${item}</li>`).join('')}</ul>
+          </div>
+          <div>
+            <p class="nd-label">À éviter</p>
+            <ul>${note.avoid.map((item) => `<li>${item}</li>`).join('')}</ul>
+          </div>
+        </div>
+      </section>`
+  }).join('')
+
+  root.innerHTML = `
+    <article class="notes-doc">
+      <header class="nd-cover">
+        <p class="nd-kicker">Notes d’orateur — à ne pas montrer</p>
+        <h1>CRM · Automation · AI Integration</h1>
+        <p class="nd-cover-sub">Hafida El-Mouden — entretien Lemay Consulting / Optimo CRM</p>
+        <p class="nd-cover-meta">15 slides · objectif ${formatClock(TOTAL_SECONDS)} · marge jusqu’à 10:00</p>
+      </header>
+      ${rows}
+    </article>`
+
+  if (!location.search.includes('pdf=1')) window.setTimeout(() => window.print(), 500)
+}
+
 /* ------------------------------------------------------------------- print */
 function renderPrint() {
   body.className = 'mode-print'
+  setPageRule('@page { size: 338.66mm 190.5mm; margin: 0; }')
   root.className = ''
   root.innerHTML = `<div class="print-stack">${SLIDES.map((slide) => renderStage(slide.id)).join('')}</div>`
-  window.setTimeout(() => window.print(), 600)
+  if (!location.search.includes('pdf=1')) window.setTimeout(() => window.print(), 600)
 }
 
 /* -------------------------------------------------------------- HUD fading */
@@ -410,6 +488,11 @@ document.addEventListener('keydown', (event) => {
     case 'P':
       event.preventDefault()
       setMode('print')
+      break
+    case 'n':
+    case 'N':
+      event.preventDefault()
+      setMode('notes')
       break
     case '?':
       event.preventDefault()
