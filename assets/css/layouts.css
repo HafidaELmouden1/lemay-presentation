@@ -931,3 +931,59 @@ kbd {
   fill: none;
   stroke-width: 1.4;
 }
+
+/* ================================================================ preuves == */
+.proof-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8cqw;
+}
+
+.proof-card {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.9cqw;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.proof-frame {
+  width: 100%;
+  overflow: hidden;
+  background: #f4f4f5;
+  border-bottom: 1px solid var(--line);
+}
+
+.proof-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+}
+
+/* la capture n8n est très large : on la contient au lieu de la rogner */
+.proof-frame-contain img {
+  object-fit: contain;
+  object-position: center;
+}
+
+.band-dark p {
+  min-width: 0;
+  flex: 1;
+}
+
+.proof-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6cqw;
+  padding: 0.45cqw 0.7cqw 0.1cqw;
+}
+
+.proof-note {
+  padding: 0 0.7cqw 0.5cqw;
+  line-height: 1.3;
+}

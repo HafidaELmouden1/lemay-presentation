@@ -460,6 +460,60 @@ export function slide05n8n() {
   </div>`
 }
 
+/* --------------------------------------------------------- slide 07 preuve */
+export function slide07Proof() {
+  const shot = (src, label, caption, height) => `
+    <figure class="proof-card anim" ${a(0.1)}>
+      <div class="proof-frame ${height.includes('contain') ? 'proof-frame-contain' : ''}" style="height:${height.replace(' contain', '')}">
+        <img src="./assets/screenshots/${src}" alt="${label}" />
+      </div>
+      <figcaption class="proof-caption">
+        <span class="t-small" style="font-weight:600">${label}</span>
+        <span class="status status-real">REAL</span>
+      </figcaption>
+      <p class="t-small muted proof-note">${caption}</p>
+    </figure>`
+
+  return `
+  ${head({
+    kicker: 'Q1 · Preuve d’exécution',
+    title: 'La chaîne a tourné — voici ce qu’elle produit',
+    lead: 'Trois captures du compte de démonstration — workflows publiés, pipeline alimenté, contact enrichi.',
+  })}
+
+  <div class="proof-stack mt-2">
+    ${shot(
+      'n8n-workflows.png',
+      'n8n — deux workflows publiés',
+      'Construction Intake et Quality Guardian, tous deux actifs.',
+      '11.2cqw contain',
+    )}
+
+    <div class="grid g2" style="gap:0.9cqw">
+      ${shot(
+        'ghl-pipeline.png',
+        'GoHighLevel — le pipeline Construction Sales',
+        '5 opportunités : 1 en Missing Information, 4 en Site Visit To Schedule.',
+        '12.2cqw contain',
+      )}
+      ${shot(
+        'ghl-tags.png',
+        'Le contact écrit par LeadGuard',
+        '7 tags posés par le workflow, dont site-visit et needs-human-review.',
+        '12.2cqw contain',
+      )}
+    </div>
+  </div>
+
+  <div class="band-dark anim mt-2" ${a(0.45)}>
+    ${icon('check-circle', 'icon')}
+    <p class="t-body" style="margin:0">
+      Chaque opportunité vient du formulaire · 
+      <span class="accent">aucun message n’est parti au prospect</span>
+    </p>
+  </div>`
+}
+
 /* ---------------------------------------------------------------- slide 05 */
 export function slide05() {
   return `
