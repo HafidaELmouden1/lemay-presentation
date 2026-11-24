@@ -363,6 +363,103 @@ export function slide04() {
   </p>`
 }
 
+/* ------------------------------------------------------------ slide 05 n8n */
+export function slide05n8n() {
+  const workflows = [
+    {
+      n: 'W1',
+      name: 'Construction Intake',
+      trigger: 'Webhook du formulaire GHL',
+      role: 'Le chemin d’entrée : il transforme une soumission en décision.',
+      steps: [
+        'reçoit et normalise les champs du formulaire',
+        'valide contact, consentement, structure',
+        'appelle LeadGuard et attend la route',
+        'écrit champs, tags, étape, note, tâche',
+      ],
+      out: 'une des quatre branches : qualifié · revue · sécurité · échec',
+      status: 'REAL',
+      live: 'actif',
+    },
+    {
+      n: 'W2',
+      name: 'Quality Guardian',
+      trigger: 'Toutes les 15 minutes',
+      role: 'Le contrôle : il surveille ce que l’automatisation laisse traîner.',
+      steps: [
+        'lit l’état réel des leads traités',
+        'détecte : bloqué en qualification, sans tâche, visite sans suite, désynchro',
+        'regroupe les anomalies par type',
+        'journalise une ligne d’audit',
+      ],
+      out: 'un rapport d’incidents interne, sans message client',
+      status: 'REAL',
+      live: 'actif',
+    },
+    {
+      n: 'W3',
+      name: 'Operations Handoff',
+      trigger: 'Opportunité en Operations Handoff',
+      role: 'La sortie : il transfère le dossier gagné vers les opérations.',
+      steps: [
+        'lit l’opportunité transférée',
+        'appelle l’API de gestion de projets',
+        'récupère l’identifiant du projet créé',
+        'met à jour GHL + note de transfert',
+      ],
+      out: 'project_id écrit dans le CRM, tag de transfert posé',
+      status: 'MOCK',
+      live: 'API simulée',
+    },
+  ]
+
+  return `
+  ${head({
+    kicker: 'Q1 · Automatisation n8n',
+    title: 'Trois workflows, trois responsabilités',
+    lead: 'n8n n’est pas un seul flux : c’est un jeu de workflows qui se relaient, chacun avec un déclencheur et une sortie.',
+  })}
+
+  <div class="grid g3 mt-3">
+    ${workflows
+      .map(
+        (wf, index) => `
+      <div class="card anim" ${a(0.08 + index * 0.1)} style="display:flex;flex-direction:column;padding:1.1cqw 1.15cqw">
+        <div class="row between">
+          <span class="mono t-label muted">${wf.n}</span>
+          <span class="status ${wf.status === 'REAL' ? 'status-real' : 'status-mock'}">${wf.status}</span>
+        </div>
+
+        <p class="t-h2" style="margin-top:0.6cqw;font-size:clamp(0.9rem,1.35cqw,1.35rem)">${wf.name}</p>
+
+        <div class="row wrap" style="gap:0.25cqw;margin-top:0.5cqw">
+          ${icon('timer', 'icon icon-sm muted')}
+          <span class="t-small muted">${wf.trigger}</span>
+        </div>
+
+        <p class="t-small soft" style="margin-top:0.6cqw">${wf.role}</p>
+
+        <div class="roles" style="margin-top:0.7cqw">
+          ${wf.steps
+            .map((step) => `<div class="role"><span class="role-mark">→</span><span>${step}</span></div>`)
+            .join('')}
+        </div>
+
+        <div class="role-boundary" style="margin-top:auto">Sortie : ${wf.out}</div>
+      </div>`,
+      )
+      .join('')}
+  </div>
+
+  <div class="band-dark anim mt-2" ${a(0.55)}>
+    ${icon('workflow', 'icon')}
+    <p class="t-body" style="margin:0">
+      Un déclencheur, une responsabilité, une sortie : <span class="accent">W1 fait entrer</span>,
+      W2 surveille, W3 transfère
+    </p>
+  </div>`
+}
+
 /* ---------------------------------------------------------------- slide 05 */
 export function slide05() {
   return `

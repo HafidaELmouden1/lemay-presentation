@@ -14,7 +14,7 @@ from pathlib import Path
 import pymupdf
 
 TARGETS = {
-    "Hafida-El-Mouden-Presentation-Lemay.pdf": 15,
+    "Hafida-El-Mouden-Presentation-Lemay.pdf": 16,
     "Hafida-El-Mouden-Discours-Lemay.pdf": None,
 }
 

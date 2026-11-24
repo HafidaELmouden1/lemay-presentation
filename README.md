@@ -2,7 +2,7 @@
 
 Présentation web pour l'entretien Lemay Consulting / Optimo CRM.
 Elle couvre les cinq sujets demandés (architecture GoHighLevel + n8n + IA, QuoteFlow AI + Odoo 19,
-résolution de problème, full ownership, adaptation à GoHighLevel) en **15 slides / 9 min 05**.
+résolution de problème, full ownership, adaptation à GoHighLevel) en **16 slides / 9 min 53**.
 
 Trois modes, une seule source de contenu :
 
@@ -20,8 +20,8 @@ Trois modes, une seule source de contenu :
 | Présentation (à envoyer au recruteur) | <https://hafidaelmouden1.github.io/lemay-presentation/> |
 | Votre discours (privé, ne pas partager) | <https://hafidaelmouden1.github.io/lemay-presentation/#/speaker> |
 | Répétition chronométrée | <https://hafidaelmouden1.github.io/lemay-presentation/#/rehearse> |
-| PDF — présentation (15 pages) | [`pdf/Hafida-El-Mouden-Presentation-Lemay.pdf`](pdf/Hafida-El-Mouden-Presentation-Lemay.pdf) |
-| PDF — discours (8 pages A4) | [`pdf/Hafida-El-Mouden-Discours-Lemay.pdf`](pdf/Hafida-El-Mouden-Discours-Lemay.pdf) |
+| PDF — présentation (16 pages) | [`pdf/Hafida-El-Mouden-Presentation-Lemay.pdf`](pdf/Hafida-El-Mouden-Presentation-Lemay.pdf) |
+| PDF — discours (16 pages A4) | [`pdf/Hafida-El-Mouden-Discours-Lemay.pdf`](pdf/Hafida-El-Mouden-Discours-Lemay.pdf) |
 
 Hébergé par GitHub Pages (branche `gh-pages`, dossier `dist/`). Pour republier après une
 modification : `npm run build`, puis pousser `dist/` sur `gh-pages`.
@@ -63,7 +63,7 @@ Voir `DEPLOYMENT.md` pour les détails, y compris un sous-chemin (`/presentation
 | `F` | plein écran |
 | `S` | mode orateur (même fenêtre) |
 | `R` | mode répétition (chronomètre remis à zéro) |
-| `P` | vue impression (15 pages, 16:9) → PDF |
+| `P` | vue impression (16 pages, 16:9) → PDF |
 | `N` | document « notes d'orateur » (A4) → PDF |
 | `?` | rappel des raccourcis |
 | `Échap` | quitter un mode |
@@ -96,7 +96,7 @@ uv run --with pymupdf python scripts/pdf/trim.py exports
 ```
 
 `trim.py` vérifie au passage que chaque page contient du texte et que le deck fait bien
-**15 pages** en 960×540 pt (16:9).
+**16 pages** en 960×540 pt (16:9).
 
 ## Éditer le contenu
 
