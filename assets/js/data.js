@@ -159,7 +159,7 @@ export const NOTES = {
     show: [
       'Le badge Published sur les deux workflows',
       'Les compteurs 1 et 4 dans les deux étapes du pipeline',
-      'Les sept tags du contact',
+      'Les sept tags du contact et la ligne « Contact source : LeadGuard AI »',
     ],
     avoid: [
       'Ne pas montrer les données personnelles : elles sont masquées, ne pas les commenter',
@@ -170,7 +170,8 @@ export const NOTES = {
       ['Capture n8n', '« Deux workflows publiés sur l’instance hébergée : l’admission et le gardien. »'],
       ['Capture pipeline', '« Le pipeline Construction Sales contient cinq opportunités, créées et déplacées par le workflow. »'],
       ['Les compteurs 1 et 4', '« Une demande incomplète en Missing Information, quatre qualifiées en Site Visit To Schedule. »'],
-      ['Capture contact', '« Le contact porte les sept tags posés par l’analyse, dont needs-human-review et missing-information : la décision est visible dans le CRM. »'],
+      ['Capture contact', '« Le contact porte les sept tags posés par l’analyse, dont needs-human-review et missing-information. »'],
+      ['Contact source', '« Et en dessous : contact source « LeadGuard AI », type « Lead » — c’est le CRM lui-même qui atteste de qui a créé la fiche. »'],
       ['La phrase du bas', '« Et surtout : aucun message n’est parti au prospect — l’automatisation s’arrête au CRM. »'],
     ],
   },

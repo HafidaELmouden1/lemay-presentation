@@ -485,22 +485,22 @@ export function slide07Proof() {
     ${shot(
       'n8n-workflows.png',
       'n8n — deux workflows publiés',
-      'Construction Intake et Quality Guardian, tous deux actifs.',
+      'Construction Intake et Quality Guardian, tous deux publiés.',
       '11.2cqw contain',
     )}
 
-    <div class="grid g2" style="gap:0.9cqw">
+    <div class="grid" style="grid-template-columns:1.9fr 1fr;gap:0.9cqw">
       ${shot(
         'ghl-pipeline.png',
         'GoHighLevel — le pipeline Construction Sales',
         '5 opportunités : 1 en Missing Information, 4 en Site Visit To Schedule.',
-        '12.2cqw contain',
+        '13.2cqw contain',
       )}
       ${shot(
-        'ghl-tags.png',
-        'Le contact écrit par LeadGuard',
-        '7 tags posés par le workflow, dont site-visit et needs-human-review.',
-        '12.2cqw contain',
+        'ghl-contact.png',
+        'Le contact créé par LeadGuard',
+        '7 tags posés par l’analyse · source « LeadGuard AI », type « Lead ».',
+        '13.2cqw contain',
       )}
     </div>
   </div>
@@ -508,8 +508,7 @@ export function slide07Proof() {
   <div class="band-dark anim mt-2" ${a(0.45)}>
     ${icon('check-circle', 'icon')}
     <p class="t-body" style="margin:0">
-      Chaque opportunité vient du formulaire · 
-      <span class="accent">aucun message n’est parti au prospect</span>
+      Chaque opportunité vient du formulaire.<span class="accent"> Aucun message n’est parti au prospect.</span>
     </p>
   </div>`
 }
