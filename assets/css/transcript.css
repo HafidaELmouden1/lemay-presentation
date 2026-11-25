@@ -1,0 +1,363 @@
+/* ============================================================ transcription ==
+   Document de lecture : même charte que le deck, mais pensé pour être lu
+   et imprimé en A4 (le recruteur peut le sauvegarder ou le citer). */
+
+.mode-transcript {
+  background: #0b0c0e;
+  /* le deck bloque le défilement : un document doit pouvoir se lire */
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.tr-doc {
+  width: min(78ch, 94vw);
+  margin: 0 auto;
+  padding: 9vh 0 12vh;
+  color: #e9eaec;
+  font-family: var(--font-sans);
+  line-height: 1.72;
+}
+
+/* ---------------------------------------------------------------- couverture */
+.tr-cover {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-bottom: 2.4rem;
+  margin-bottom: 2.6rem;
+}
+
+.tr-kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin: 0 0 0.9rem;
+}
+
+.tr-cover h1 {
+  font-size: 2.3rem;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.7rem;
+}
+
+.tr-sub {
+  font-size: 1.02rem;
+  color: rgba(233, 234, 236, 0.72);
+  margin: 0 0 1.6rem;
+}
+
+.tr-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 1rem 1.6rem;
+  margin: 0;
+}
+
+.tr-meta div {
+  border-left: 2px solid var(--accent-deep);
+  padding-left: 0.7rem;
+}
+
+.tr-meta dt {
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(233, 234, 236, 0.5);
+  margin: 0 0 0.2rem;
+}
+
+.tr-meta dd {
+  margin: 0;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.tr-note {
+  margin: 1.6rem 0 0;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 3px solid var(--accent);
+  border-radius: 0.4rem;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: rgba(233, 234, 236, 0.78);
+}
+
+/* ------------------------------------------------------------------ sommaire */
+.tr-toc {
+  margin: 0 0 3rem;
+}
+
+.tr-toc h2 {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(233, 234, 236, 0.5);
+  font-weight: 700;
+  margin: 0 0 0.9rem;
+}
+
+.tr-toc ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 0.15rem 2rem;
+}
+
+.tr-toc a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  padding: 0.42rem 0;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.tr-toc a:hover .tr-toc-label {
+  color: var(--accent);
+}
+
+.tr-toc-n {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.72rem;
+  color: rgba(233, 234, 236, 0.4);
+  min-width: 1.4rem;
+}
+
+.tr-toc-label {
+  font-size: 0.88rem;
+  font-weight: 500;
+  flex: 1;
+  transition: color 0.15s;
+}
+
+.tr-toc-ts {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.74rem;
+  color: rgba(233, 234, 236, 0.45);
+}
+
+/* ----------------------------------------------------------------- chapitres */
+.tr-chapter {
+  margin: 0 0 2.8rem;
+  scroll-margin-top: 2rem;
+}
+
+.tr-chapter > header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin: 0 0 1.1rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.tr-chapter h2 {
+  font-size: 1.16rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+  flex: 1;
+}
+
+.tr-chapter .tr-range {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.74rem;
+  color: rgba(233, 234, 236, 0.45);
+}
+
+.tr-para {
+  display: grid;
+  grid-template-columns: 3.2rem 1fr;
+  gap: 0.9rem;
+  margin: 0 0 0.95rem;
+}
+
+.tr-para-ts {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.7rem;
+  color: rgba(233, 234, 236, 0.34);
+  padding-top: 0.34rem;
+}
+
+.tr-para p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: rgba(233, 234, 236, 0.94);
+}
+
+.tr-para strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------- pied de page */
+.tr-foot {
+  margin-top: 3rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.78rem;
+  color: rgba(233, 234, 236, 0.55);
+  line-height: 1.7;
+}
+
+.tr-foot a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ------------------------------------------------------------------- bouton */
+.tr-print {
+  position: fixed;
+  right: 1.6rem;
+  bottom: 1.6rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(20, 22, 26, 0.92);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+
+.tr-print:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------------ impression */
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm 18mm 18mm;
+  }
+
+  .mode-transcript {
+    background: #fff !important;
+  }
+
+  .tr-doc {
+    width: auto;
+    padding: 0;
+    color: #111;
+    font-size: 10.5pt;
+    line-height: 1.55;
+  }
+
+  .tr-cover {
+    border-color: #ccd;
+  }
+
+  .tr-cover h1 {
+    font-size: 21pt;
+    color: #000;
+  }
+
+  .tr-sub,
+  .tr-chapter .tr-range,
+  .tr-toc-ts,
+  .tr-para-ts {
+    color: #666 !important;
+  }
+
+  .tr-kicker {
+    color: #b3000c;
+  }
+
+  .tr-meta div {
+    border-left: 2px solid #b3000c;
+  }
+
+  .tr-meta dt,
+  .tr-toc h2 {
+    color: #777;
+  }
+
+  .tr-meta dd,
+  .tr-para p {
+    color: #111 !important;
+  }
+
+  .tr-note {
+    background: #f6f6f7;
+    border: 1px solid #d8d9dc;
+    border-left: 3px solid #b3000c;
+    color: #333 !important;
+  }
+
+  .tr-chapter {
+    break-inside: avoid-page;
+  }
+
+  .tr-chapter > header {
+    border-color: #ccd;
+    break-after: avoid;
+  }
+
+  .tr-chapter h2 {
+    color: #000;
+  }
+
+  .tr-toc a {
+    border-color: #e2e3e6;
+  }
+
+  .tr-toc-label {
+    color: #111;
+  }
+
+  .tr-toc-n {
+    color: #999;
+  }
+
+  .tr-foot {
+    border-color: #ccd;
+    color: #555;
+  }
+
+  .tr-foot a {
+    color: #b3000c;
+  }
+
+  .tr-print {
+    display: none;
+  }
+}
+
+.tr-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-bottom: 2.2rem;
+  color: var(--muted-2, #8b8f96);
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tr-back:hover {
+  color: var(--accent, #ff0a17);
+}
+
+/* les icônes du deck sont dimensionnées en cqw : ici il faut des pixels */
+.tr-back svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  flex: none;
+}
+
+@media print {
+  .tr-back,
+  .tr-print {
+    display: none;
+  }
+}

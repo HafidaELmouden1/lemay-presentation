@@ -1,0 +1,630 @@
+/* =========================================================================
+   Design tokens — inspired by the Lemay Consulting direction:
+   warm off-white paper, charcoal ink, one lime accent, thin grey rules.
+   ========================================================================= */
+:root {
+  /* Palette relevée sur le site de l'agence : fonds anthracite et noir,
+     rouge #FF0A17 en accent unique, blanc cassé pour le texte.
+     Sources : backgroundColor calculés sur lemayconsulting.com
+     (sections #000000 / #14161a, CTA #ff0a17, texte #ffffff). */
+  --paper: #0d0e10;
+  --paper-2: #17191d;
+  --surface: #15171b;
+  --surface-2: #1c1f24;
+
+  --ink: #f4f5f6;
+  --ink-soft: #c9ced4;
+  --muted: #8b929b;
+
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.24);
+
+  --accent: #ff0a17;
+  --accent-deep: #c80712;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(255, 10, 23, 0.12);
+
+  --night: #050607;
+  --night-2: #14161a;
+  --night-line: #2a2d33;
+  --night-text: #f4f5f6;
+  --night-muted: #9aa0a8;
+
+  --ok-bg: rgba(70, 200, 120, 0.14);
+  --ok-fg: #57d68a;
+  --warn-bg: rgba(245, 200, 90, 0.14);
+  --warn-fg: #f0c463;
+  --alert-bg: rgba(255, 10, 23, 0.14);
+  --alert-fg: #ff7a84;
+
+  --font: 'Montserrat', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --display: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
+  --mono: ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, monospace;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+}
+
+body.mode-speaker,
+body.mode-rehearse,
+body.mode-print {
+  overflow: auto;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+/* -------------------------------------------------------------- the stage --
+   One slide is a 16:9 canvas. Everything inside is sized with cqw/cqh so the
+   same layout renders on a 1366x768 laptop and a 1920x1080 projector.
+   -------------------------------------------------------------------------- */
+.stage {
+  position: relative;
+  container-type: size;
+  width: min(100vw, 177.78vh);
+  height: min(56.25vw, 100vh);
+  background: var(--paper);
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.app {
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  /* header at the top, content optically centred, footer on the last line */
+  justify-content: space-between;
+  /* the bottom band is reserved for the HUD: content never collides with it */
+  padding: 4.6cqw 5.6cqw 7.4cqw;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.slide[data-tone='dark'] {
+  background: var(--night);
+  color: var(--night-text);
+}
+
+/* Inverse : quelques slides claires, comme les blocs blancs de leur site. */
+.slide[data-tone='light'] {
+  background: #f4f4f5;
+  color: #14161a;
+}
+
+.slide[data-tone='light'] .muted {
+  color: #6b7079;
+}
+
+.slide[data-tone='light'] .t-lead,
+.slide[data-tone='light'] .soft {
+  color: #33373d;
+}
+
+/* ------------------------------------------------------------ typography -- */
+.t-display {
+  font-family: var(--display);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.94;
+  font-size: clamp(1.7rem, 5.2cqw, 6rem);
+}
+
+.t-h1 {
+  font-size: clamp(1.25rem, 3.35cqw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  font-weight: 600;
+  margin: 0;
+}
+
+.t-h2 {
+  font-size: clamp(1rem, 1.95cqw, 2rem);
+  line-height: 1.16;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+  margin: 0;
+}
+
+.t-lead {
+  font-size: clamp(0.9rem, 1.38cqw, 1.42rem);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.t-body {
+  font-size: clamp(0.78rem, 1.12cqw, 1.15rem);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.t-small {
+  font-size: clamp(0.68rem, 0.92cqw, 0.98rem);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.t-label {
+  font-size: clamp(0.6rem, 0.74cqw, 0.8rem);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0;
+}
+
+.mono {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.soft {
+  color: var(--ink-soft);
+}
+
+/* --------------------------------------------------------------- surfaces -- */
+.card,
+.card-flat,
+.card-dark {
+  border-radius: 1.05cqw;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.card-flat {
+  background: var(--paper-2);
+}
+
+.card-dark {
+  background: var(--night-2);
+  border-color: var(--night-line);
+  color: var(--night-text);
+}
+
+.pad {
+  padding: 1.15cqw 1.25cqw;
+}
+
+.pad-sm {
+  padding: 0.8cqw 0.95cqw;
+}
+
+.rule-h {
+  height: 1px;
+  background: var(--line);
+  border: 0;
+  margin: 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 0.32em 0.8em;
+  font-size: clamp(0.55rem, 0.66cqw, 0.74rem);
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+  background: var(--surface);
+  white-space: nowrap;
+}
+
+.chip-accent {
+  background: var(--accent);
+  border-color: var(--accent-deep);
+  color: var(--accent-ink);
+  font-weight: 600;
+}
+
+.chip-night {
+  background: transparent;
+  border-color: var(--night-line);
+  color: #cfd2c4;
+}
+
+.status {
+  font-size: clamp(0.5rem, 0.6cqw, 0.66rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 0.28cqw;
+  border: 1px solid;
+  padding: 0.14em 0.5em;
+  white-space: nowrap;
+}
+
+.status-real {
+  background: var(--ok-bg);
+  border-color: var(--ok-fg);
+  color: var(--ok-fg);
+}
+
+.status-mock {
+  background: var(--warn-bg);
+  border-color: var(--warn-fg);
+  color: var(--warn-fg);
+}
+
+.status-none {
+  background: var(--alert-bg);
+  border-color: var(--alert-fg);
+  color: var(--alert-fg);
+}
+
+/* ------------------------------------------------------------------ parts -- */
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  color: var(--muted);
+}
+
+.kicker::before {
+  content: '';
+  width: 1.6cqw;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ink);
+}
+
+.slide[data-tone='dark'] .kicker {
+  color: var(--night-muted);
+}
+
+.slide[data-tone='dark'] .kicker::before {
+  background: var(--accent);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7cqw;
+}
+
+.head-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 3cqw;
+}
+
+.num {
+  display: inline-grid;
+  place-items: center;
+  width: 2.05cqw;
+  height: 2.05cqw;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  font-family: var(--mono);
+  font-size: clamp(0.58rem, 0.78cqw, 0.84rem);
+  flex: none;
+}
+
+.num-accent {
+  background: var(--accent);
+  border-color: var(--accent-deep);
+  color: var(--accent-ink);
+}
+
+.num-dark {
+  background: var(--night-2);
+  border-color: var(--night-line);
+  color: var(--night-text);
+}
+
+.stat-label {
+  color: var(--muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: clamp(0.5rem, 0.6cqw, 0.66rem);
+  font-weight: 600;
+  margin: 0 0 0.25cqw;
+}
+
+.stat-value {
+  font-family: var(--mono);
+  font-size: clamp(0.8rem, 1.15cqw, 1.24rem);
+  line-height: 1.05;
+}
+
+.foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2cqw;
+  padding-top: 1.1cqw;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.band-dark {
+  display: flex;
+  align-items: center;
+  gap: 1cqw;
+  border-radius: 0.9cqw;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.9cqw 1.4cqw;
+  font-size: clamp(0.72rem, 1cqw, 1.02rem);
+}
+
+.band-dark strong,
+.band-dark .accent {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25em;
+}
+
+/* --------------------------------------------------------------- motion --- */
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.8cqw);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.anim {
+  animation: riseIn var(--dur, 0.45s) var(--ease) both;
+  animation-delay: var(--delay, 0s);
+}
+
+.anim-fade {
+  animation: fadeIn var(--dur, 0.4s) var(--ease) both;
+  animation-delay: var(--delay, 0s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim,
+  .anim-fade {
+    animation: none;
+  }
+}
+
+/* ----------------------------------------------------------------- print -- */
+
+/* ============================== notes document (A4) ====================== */
+.mode-notes {
+  background: #fff;
+  overflow: auto;
+}
+
+.notes-doc {
+  width: 210mm;
+  margin: 0 auto;
+  padding: 16mm 15mm 18mm;
+  background: #fff;
+  color: #14161a;
+  font-family: var(--font);
+  font-size: 10.5pt;
+  line-height: 1.5;
+}
+
+.nd-cover {
+  border-bottom: 3px solid #ff0a17;
+  padding-bottom: 8mm;
+  margin-bottom: 8mm;
+}
+
+.nd-kicker {
+  font-size: 8pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #ff0a17;
+  margin: 0 0 3mm;
+}
+
+.nd-cover h1 {
+  font-size: 24pt;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.nd-cover-sub {
+  font-size: 11pt;
+  margin: 3mm 0 0;
+  color: #3a3f46;
+}
+
+.nd-cover-meta {
+  font-size: 9pt;
+  margin: 1.5mm 0 0;
+  color: #6b7079;
+  font-family: var(--mono);
+}
+
+.nd-slide {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  border-top: 1px solid #dcdfe4;
+  padding: 6mm 0 7mm;
+}
+
+.nd-head {
+  display: flex;
+  gap: 4mm;
+  align-items: baseline;
+}
+
+.nd-num {
+  font-family: var(--mono);
+  font-size: 13pt;
+  font-weight: 700;
+  color: #ff0a17;
+}
+
+.nd-head h2 {
+  font-size: 13pt;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.nd-meta {
+  font-size: 8.5pt;
+  color: #6b7079;
+  margin: 1mm 0 0;
+}
+
+.nd-guide {
+  font-size: 9pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #14161a;
+  margin: 4mm 0 2mm;
+}
+
+.nd-speech {
+  font-size: 11pt;
+  line-height: 1.62;
+  margin: 0;
+}
+
+.nd-details {
+  margin-top: 4mm;
+  border-left: 2px solid #ff0a17;
+  padding-left: 4mm;
+}
+
+.nd-details ul {
+  margin: 0;
+  padding-left: 4mm;
+  font-size: 9.5pt;
+  line-height: 1.5;
+}
+
+.nd-details li {
+  margin-bottom: 1.2mm;
+}
+
+.nd-details strong {
+  color: #14161a;
+}
+
+.nd-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6mm;
+  margin-top: 4mm;
+}
+
+.nd-label {
+  font-size: 7.5pt;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #6b7079;
+  margin: 0 0 1mm;
+}
+
+.nd-key,
+.nd-next {
+  margin: 0;
+  font-size: 9.5pt;
+}
+
+.nd-key {
+  font-weight: 600;
+}
+
+.nd-slide ul {
+  margin: 0;
+  padding-left: 4mm;
+  font-size: 9.5pt;
+}
+
+.nd-slide li + li {
+  margin-top: 0.8mm;
+}
+
+@media print {
+  .mode-notes {
+    background: #fff;
+  }
+
+  .notes-doc {
+    width: auto;
+    padding: 0;
+  }
+}
+
+@media print {
+
+  body {
+    background: #fff;
+    overflow: visible;
+  }
+
+  .hud,
+  .controls {
+    display: none !important;
+  }
+
+  html,
+  body.mode-print {
+    height: auto;
+    min-height: 0;
+  }
+
+  .print-stack .stage {
+    width: 100%;
+    height: calc(100vh - 0.6px);
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .print-stack .stage:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+}
+
+/* La règle @page est injectée par le mode actif (voir app.js) : une seule
+   règle anonyme, donc aucun saut de page parasite entre deux formats. */

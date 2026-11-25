@@ -1,0 +1,1042 @@
+/* =========================================================================
+   Layout primitives used by the slides.
+   ========================================================================= */
+
+/* ------------------------------------------------------------------ grids -- */
+.grid {
+  display: grid;
+  gap: 1cqw;
+}
+
+.g2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.g3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.g4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.g5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.g6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+.g-1-1 {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+.g-58-42 {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+}
+.g-60-40 {
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
+}
+.g-40-60 {
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.7cqw;
+}
+
+.row-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7cqw;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55cqw;
+}
+
+.stack-lg {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1cqw;
+}
+
+.mt-auto {
+  margin-top: auto;
+}
+
+.mt-1 {
+  margin-top: 0.6cqw;
+}
+.mt-2 {
+  margin-top: 1.1cqw;
+}
+.mt-3 {
+  margin-top: 1.7cqw;
+}
+.mt-4 {
+  margin-top: 2.4cqw;
+}
+
+.grow {
+  flex: 1;
+  min-height: 0;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.icon {
+  width: 1.15cqw;
+  height: 1.15cqw;
+  flex: none;
+  stroke-width: 1.6;
+  stroke: currentColor;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon-sm {
+  width: 0.95cqw;
+  height: 0.95cqw;
+}
+
+.icon-lg {
+  width: 1.4cqw;
+  height: 1.4cqw;
+}
+
+/* --------------------------------------------------------- architecture --- */
+.arch {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5cqw;
+  min-height: 0;
+  /* pas de flex:1 : le bloc se centre entre le titre et la bande au lieu de
+     remplir la zone et laisser un vide interne */
+  flex: 0 1 auto;
+}
+
+.zone {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5cqw;
+  min-width: 0;
+  justify-content: flex-start;
+}
+
+.zone-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5cqw;
+  padding-bottom: 0.35cqw;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+/* A zone is a labelled column of cards, not a box: empty borders read as
+   unfinished, so the column hugs its content and centres it vertically. */
+.zone-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55cqw;
+  justify-content: flex-start;
+  flex: 0 1 auto;
+}
+
+/* a single architecture block */
+.node {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6cqw;
+  padding: 0.75cqw 0.9cqw;
+  border-radius: 0.8cqw;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  min-width: 0;
+}
+
+.node-title {
+  font-size: clamp(0.76rem, 1.06cqw, 1.1rem);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.45cqw;
+}
+
+.node-caption {
+  font-size: clamp(0.64rem, 0.86cqw, 0.92rem);
+  color: var(--muted);
+  line-height: 1.35;
+  margin: 0.15cqw 0 0;
+}
+
+.node-badge {
+  font-size: clamp(0.44rem, 0.52cqw, 0.58rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  background: var(--paper-2);
+  border-radius: 999px;
+  padding: 0.12em 0.5em;
+  white-space: nowrap;
+}
+
+.node-accent {
+  background: var(--accent);
+  border-color: var(--accent-deep);
+  color: var(--accent-ink);
+}
+
+.node-accent .node-caption,
+.node-accent .node-badge {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.node-accent .node-badge {
+  background: rgba(0, 0, 0, 0.22);
+  color: #fff;
+}
+
+.node-dark {
+  background: var(--night-2);
+  border-color: var(--night-line);
+  color: var(--night-text);
+}
+
+.node-dark .node-caption {
+  color: var(--night-muted);
+}
+
+.node-dark .icon {
+  color: var(--accent);
+}
+
+.node-note {
+  font-size: clamp(0.64rem, 0.86cqw, 0.92rem);
+  line-height: 1.4;
+  color: var(--ink-soft);
+  background: var(--paper-2);
+  border-radius: 0.55cqw;
+  padding: 0.55cqw 0.7cqw;
+}
+
+.arrow-h,
+.arrow-v {
+  display: grid;
+  place-items: center;
+  color: var(--line-strong);
+  flex: none;
+}
+
+.arrow-h {
+  width: 2cqw;
+  align-items: flex-start;
+  padding-top: 2.6cqw;
+}
+
+.arrow-h svg,
+.arrow-v svg {
+  width: 1.15cqw;
+  height: 1.15cqw;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ------------------------------------------------------------- timeline --- */
+.timeline {
+  display: flex;
+  align-items: stretch;
+  gap: 0.45cqw;
+}
+
+.tl-item {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45cqw;
+}
+
+.tl-card {
+  flex: 1;
+  border-radius: 0.7cqw;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  padding: 0.7cqw 0.6cqw;
+}
+
+.tl-phase {
+  background: var(--paper-2);
+}
+.tl-tech {
+  background: rgba(255, 10, 23, 0.08);
+  border-color: rgba(255, 10, 23, 0.42);
+}
+.tl-contract {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--line-strong);
+}
+.tl-ops {
+  background: var(--accent);
+  border-color: var(--accent-deep);
+  color: #fff;
+}
+
+.tl-bar {
+  height: 0.28cqw;
+  border-radius: 999px;
+  background: var(--line-strong);
+}
+
+.tl-bar-accent {
+  background: var(--accent-deep);
+}
+
+/* --------------------------------------------------------------- states --- */
+.route {
+  display: flex;
+  flex-direction: column;
+  padding: 1.4cqw;
+  border-radius: 1.05cqw;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.route-flat {
+  background: var(--paper-2);
+  border-color: var(--line-strong);
+}
+
+.big-number {
+  font-family: var(--mono);
+  font-size: clamp(2rem, 4.2cqw, 4.4rem);
+  line-height: 1;
+}
+
+.status-dot {
+  width: 0.55cqw;
+  height: 0.55cqw;
+  border-radius: 999px;
+  flex: none;
+}
+
+/* =========================================================================
+   Chrome: HUD, controls, speaker panel, rehearsal overlay, print.
+   ========================================================================= */
+.hud {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 1.2cqw;
+  padding: 1.1cqw 5.6cqw 1.3cqw;
+  font-size: clamp(0.52rem, 0.62cqw, 0.68rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: opacity 0.35s var(--ease);
+  pointer-events: none;
+}
+
+.hud .hud-left {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}
+
+.hud .hud-left strong {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.hud .progress {
+  flex: 1;
+  height: 2px;
+  background: var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.hud .progress span {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+  transition: width 0.4s var(--ease);
+}
+
+.hud .counter {
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+}
+
+.hud-hidden {
+  opacity: 0;
+}
+
+.controls {
+  position: absolute;
+  right: 5.6cqw;
+  bottom: 3.4cqw;
+  z-index: 21;
+  display: flex;
+  gap: 0.4cqw;
+  transition: opacity 0.3s var(--ease);
+}
+
+.controls button {
+  width: 2.4cqw;
+  height: 2.4cqw;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition:
+    background 0.2s var(--ease),
+    border-color 0.2s var(--ease);
+}
+
+.controls button:hover {
+  background: var(--paper-2);
+  border-color: var(--ink-soft);
+}
+
+.controls svg {
+  width: 0.95cqw;
+  height: 0.95cqw;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.controls-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------- speaker mode --- */
+.speaker-shell {
+  min-height: 100vh;
+  background: var(--paper);
+  padding: 2.2rem;
+  font-family: var(--font);
+  color: var(--ink);
+  overflow: auto;
+}
+
+.speaker-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.speaker-badge {
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #ff0a17;
+}
+
+.speaker-clock {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+}
+
+.speaker-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 1.6rem;
+  align-items: start;
+}
+
+.speaker-preview {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  background: var(--paper);
+  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.6);
+  aspect-ratio: 16 / 9;
+}
+
+/* Le vrai stage 1920x1080, réduit par transform : la mise en page reste
+   identique à celle de l'écran partagé, jamais refluée dans un petit cadre. */
+.speaker-preview .stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: top left;
+}
+
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.note-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.1rem 1.2rem;
+}
+
+.note-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #ff6b73;
+  margin: 0 0 0.5rem;
+}
+
+.speech {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--ink);
+  opacity: 1;
+}
+
+.key-line {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+  color: var(--ink);
+}
+
+.note-list {
+  margin: 0;
+  padding-left: 1.05rem;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.note-card .stat-value {
+  font-size: 1.05rem;
+}
+
+.note-card .stat-label {
+  color: var(--muted);
+}
+
+.note-list li + li {
+  margin-top: 0.3rem;
+}
+
+.next-cue {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.timing-row {
+  display: flex;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+}
+
+.timing-cell {
+  min-width: 6.5rem;
+}
+
+/* -------------------------------------------------------------- rehearsal -- */
+.rehearsal-overlay {
+  position: absolute;
+  bottom: 6.4cqw;
+  right: 2.2cqw;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5cqw;
+  padding: 0.9cqw 1.1cqw;
+  border-radius: 0.7cqw;
+  background: rgba(18, 19, 15, 0.92);
+  color: #f2f0e8;
+  font-family: var(--mono);
+  font-size: clamp(0.6rem, 0.78cqw, 0.84rem);
+  box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.6);
+  min-width: 12cqw;
+}
+
+.rehearsal-overlay .ro-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.2cqw;
+}
+
+.rehearsal-overlay .ro-label {
+  color: #9aa08f;
+  font-size: 0.86em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rehearsal-overlay .ro-warn {
+  color: #f5d76e;
+}
+
+.rehearsal-overlay .ro-alert {
+  color: #ff8f8f;
+}
+
+.rehearsal-overlay .ro-ok {
+  color: var(--accent);
+}
+
+/* ---------------------------------------------------------------- print --- */
+.print-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  align-items: center;
+}
+
+.print-stack .stage {
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+/* ------------------------------------------------------------- scaffold --- */
+.help {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: none;
+  place-items: center;
+  background: rgba(18, 19, 15, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.help[data-open='true'] {
+  display: grid;
+}
+
+.help-card {
+  background: var(--surface);
+  border-radius: 1cqw;
+  border: 1px solid var(--line-strong);
+  padding: 1.6cqw 1.8cqw;
+  width: 46cqw;
+  box-shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.5);
+}
+
+.help-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55cqw 1.6cqw;
+  margin-top: 1cqw;
+}
+
+.help-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1cqw;
+  font-size: clamp(0.62rem, 0.8cqw, 0.86rem);
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+  padding: 0.35cqw 0;
+}
+
+kbd {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: 0.3cqw;
+  padding: 0.1em 0.45em;
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+/* ------------------------------------------------- speaker preview scaling -- */
+/* The preview reuses the real stage markup: same slide, scaled to the panel. */
+
+
+@media (max-width: 1100px) {
+  .speaker-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ------------------------------------------------------------ role lists --- */
+/* Chaque brique de l'architecture liste ce qu'elle fait, et ce qu'elle ne fait
+   jamais. C'est ce qui rend le flux global compréhensible en dix secondes. */
+.roles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22cqw;
+}
+
+.role {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45cqw;
+  font-size: clamp(0.62rem, 0.82cqw, 0.9rem);
+  line-height: 1.32;
+  color: var(--ink-soft);
+}
+
+.role-mark {
+  flex: none;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.role-num {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 0.86em;
+  color: var(--muted);
+}
+
+.role-boundary {
+  margin-top: 0.35cqw;
+  padding-top: 0.35cqw;
+  border-top: 1px dashed var(--line-strong);
+  font-size: clamp(0.58rem, 0.76cqw, 0.84rem);
+  line-height: 1.3;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.zone-boundary {
+  margin-top: 0.3cqw;
+}
+
+/* ---------------------------------------------- élément par élément (orateur) */
+.detail-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.detail-list li {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr;
+  gap: 0.6rem;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.detail-list li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.detail-list strong {
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+/* ================================================================= flow ==== */
+/* Un vrai schéma : des nœuds de même hauteur, des connecteurs dessinés, et une
+   barre de zones au-dessus qui dit à quel étage du système on est. */
+.lanes {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5cqw;
+  margin-bottom: 0.45cqw;
+}
+
+.lane-gap {
+  flex: none;
+  width: 3cqw;
+}
+
+.lane {
+  border-top: 1px solid var(--line-strong);
+  padding-top: 0.45cqw;
+  text-align: center;
+  font-size: clamp(0.52rem, 0.66cqw, 0.74rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.lane-live {
+  border-top-color: var(--accent);
+  color: #ff6b73;
+}
+
+.flow {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.flow-node {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35cqw;
+  min-height: 8.2cqw;
+  padding: 0.9cqw 0.95cqw;
+  border-radius: 0.8cqw;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  min-width: 0;
+  flex: 1;
+}
+
+.flow-node-accent {
+  background: var(--accent);
+  border-color: var(--accent-deep);
+  color: #fff;
+}
+
+.flow-node-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5cqw;
+}
+
+.flow-node-name {
+  font-size: clamp(0.72rem, 0.98cqw, 1.02rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.flow-node-role {
+  font-size: clamp(0.6rem, 0.8cqw, 0.88rem);
+  line-height: 1.32;
+  color: var(--ink-soft);
+}
+
+.flow-node-accent .flow-node-role {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.flow-node-tag {
+  margin-top: auto;
+  font-size: clamp(0.48rem, 0.58cqw, 0.62rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.flow-node-accent .flow-node-tag {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.flow-link {
+  flex: none;
+  width: 3cqw;
+  display: grid;
+  place-items: center;
+  color: var(--line-strong);
+}
+
+.flow-link svg {
+  width: 100%;
+  height: 1.1cqw;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.2;
+}
+
+/* ---------------------------------------------------------- bandes (Q2) --- */
+.band-row {
+  display: grid;
+  grid-template-columns: 11cqw 1fr 10.5cqw;
+  align-items: center;
+  gap: 0.8cqw;
+}
+
+.band-label {
+  text-align: right;
+}
+
+.band-role {
+  font-size: clamp(0.55rem, 0.72cqw, 0.8rem);
+  color: var(--ink-soft);
+  margin-top: 0.15cqw;
+}
+
+.band-limit {
+  font-size: clamp(0.52rem, 0.68cqw, 0.76rem);
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--muted);
+  border-left: 1px solid var(--line);
+  padding-left: 0.6cqw;
+}
+
+.band-connector {
+  display: grid;
+  place-items: center;
+  color: var(--line-strong);
+  height: 1.1cqw;
+}
+
+.band-connector svg {
+  width: 1.1cqw;
+  height: 1.1cqw;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.4;
+}
+
+/* ================================================================ preuves == */
+.proof-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8cqw;
+}
+
+.proof-card {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.9cqw;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.proof-frame {
+  width: 100%;
+  overflow: hidden;
+  background: #f4f4f5;
+  border-bottom: 1px solid var(--line);
+}
+
+.proof-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+}
+
+/* la capture n8n est très large : on la contient au lieu de la rogner */
+.proof-frame-contain img {
+  object-fit: contain;
+  object-position: center;
+}
+
+.band-dark p {
+  min-width: 0;
+  flex: 1;
+}
+
+.proof-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6cqw;
+  padding: 0.45cqw 0.7cqw 0.1cqw;
+}
+
+.proof-note {
+  padding: 0 0.7cqw 0.5cqw;
+  line-height: 1.3;
+}
+
+/* ================================================================= vidéo == */
+.video-card {
+  margin: 0;
+  border-radius: 1cqw;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--line);
+  display: flex;
+}
+
+.video-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+
+.video-list {
+  list-style: none;
+  margin: 0.6cqw 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7cqw;
+}
+
+.video-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15cqw;
+  padding-left: 0.8cqw;
+  border-left: 2px solid var(--accent-deep);
+}
+
+.video-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5cqw;
+  align-self: flex-start;
+  padding: 0.55cqw 1cqw;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--fg);
+  text-decoration: none;
+  font-size: 0.72cqw;
+  font-weight: 600;
+}
+
+.video-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
